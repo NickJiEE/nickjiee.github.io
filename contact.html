@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nick Ji | Contact</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Navbar -->
+        <header>
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo_inv.png" alt="Nick Ji Logo">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Content -->
+        <main>
+            <div id="contact-wrapper">
+                <!-- Contact Form -->
+                <section id="contact" class="section-card">
+                    <h2 class="section-title">Contact Me</h2>
+                    <p style="text-align:center;">Got a question, an idea, or just want to say hi? Drop me a message below 👇</p>
+                    <form action="https://formspree.io/f/your-form-id" method="POST">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        <input type="email" id="email" name="_replyto" placeholder="Your Email" required>
+                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </section>
+
+                <!-- Social Media -->
+                <section id="social" class="section-card">
+                    <h2 class="section-title">Connect with Me</h2>
+                    <p style="text-align:center;">You can also find me on these platforms:</p>
+                    <div class="social-links">
+                        <a href="https://github.com/nickjiee" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/nick-ji/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/unforgivenn111/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="mailto:yji@ieee.org"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2025 Nick Ji | <a href="https://github.com/nickjiee" target="_blank">GitHub</a></p>
+        </footer>
+    </div>
+</body>
+</html>

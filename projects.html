@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nick Ji | Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Navbar -->
+        <header>
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo_inv.png" alt="Nick Ji Logo">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html" class="active">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section id="hero">
+                <h1>My Projects</h1>
+                <p>Here are some of my projects, click for more details!</p>
+            </section>
+            
+            <div class="carousel-container">
+                <button class="arrow left">&#10094;</button>
+                <div class="carousel-track">
+
+                    <!-- Projects -->
+                    <div class="project-card">
+                        <img src="assets/images/KSA/KSA.png" alt="8-bit KSA">
+                        <h3>8-bit Kogge-Stone Adder</h3>
+                        <p class="project-intro">A high-speed 8-bit Kogge-Stone Adder (KSA) using static CMOS logic, designed and simulated in Cadence.</p>
+
+                        <!-- hidden modal content -->
+                        <div class="project-details" style="display:none;">
+                            <h2>8-bit Kogge-Stone Adder</h2>
+                            <p>
+                                This project implements a high-speed, 8-bit Kogge-Stone Adder (KSA) implemented using static CMOS logic in Cadence, 
+                                designed for minimum delay, reduced transistor count, and robust signal integrity at the transistor level.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/KSA/KSA.png" alt="Adder diagram">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                The design achieves <strong>logarithmic delay</strong> and is well-suited for
+                                large-scale arithmetic circuits where speed is critical.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/KSA/KSA_summary.png" alt="Adder diagram">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                For more details, check out the <a href="https://github.com/NickJiEE/8-bit_KSA" target="_blank">GitHub repository</a>!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="assets/images/Cosmic Whisper/cosmic_whisper.png" alt="Cosmic Whisper">
+                        <h3>Cosmic Whisper</h3>
+                        <p class="project-intro">An educational game for people interested in optics and circuits, as part of research supervised by Professor Saharnaz, UCSD.</p>
+
+                        <!-- hidden modal content -->
+                        <div class="project-details" style="display:none;">
+                            <h2>Cosmic Whisper</h2>
+                            <p>
+                                <i>Cosmic Whisper</i> is an interactive educational game developed to <strong>inspire interest in optics and electrical engineering through immersive and hands-on problem solving</strong>. 
+                                Designed under Professor Saharnaz’s supervision at UC San Diego, 
+                                the game casts players as scientists trying to communicate with an alien civilization orbiting a chaotic three-star system, inspired by <em>The Three-Body Problem</em>.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/Cosmic Whisper/three_body.png" alt="Cosmic Whisper setup">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                Packaged in a durable stainless steel housing and powered by an ESP32-S3 microcontroller, 
+                                the game unfolds through a <strong>multi-stage puzzle sequence</strong> that blends real-world experiments with digital logic. 
+                                Players tackle challenges involving light transmission and absorption, spectroscopy, optical ciphers (Morse code and Vigenère), and light intensity modulation. 
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/Cosmic Whisper/setup.jpg" alt="Adder diagram">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                For more details, check out the <a href="https://github.com/NickJiEE/CosmicWhisper" target="_blank">GitHub repository</a>!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="assets/images/Sonic Car/sonic_car.png" alt="SonicCar">
+                        <h3>SonicCar</h3>
+                        <p class="project-intro">An intelligent voice-controlled autonomous vehicle using LLMs & object detection.</p>
+
+                        <!-- hidden modal content -->
+                        <div class="project-details" style="display:none;">
+                            <h2>SonicCar</h2>
+                            <p>
+                                In recent years, autonomous vehicles have advanced rapidly, driven by breakthroughs in artificial intelligence (AI), sensor technologies, and deep learning. 
+                                As part of UCSD’s <strong>ECE/MAE148 (Introduction to Autonomous Vehicles)</strong> course, our team developed <em>SonicCar</em>, 
+                                a state-of-the-art autonomous vehicle capable of responding to voice commands and navigating intelligently and safely.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/Sonic Car/car_1.png" alt="Sonic Car 1">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                SonicCar integrates speech-to-text recognition with a large language model (LLM), enabling it to <strong>interpret and execute natural language commands</strong>. 
+                                To ensure safe operation, it combines <strong>LiDAR-based obstacle detection</strong> with a camera-based stop sign recognition system trained using <strong>RoboFlow deep learning</strong>. 
+                                Together, these systems enhance reliability, situational awareness, and user experience in real-world driving conditions.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/Sonic Car/car_2.png" alt="Sonic Car 2">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                For more details, check out the <a href="https://github.com/dglttr/MAE148FinalProject" target="_blank">GitHub repository</a>!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="assets/images/cosmic_whisper.png" alt="N/A">
+                        <h3>Coming soon</h3>
+                        <p class="project-intro">...</p>
+
+                        <!-- hidden modal content -->
+                        <div class="project-details" style="display:none;">
+                            <h2>N/A</h2>
+                            <p>
+                                
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/" alt="N/A">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/" alt="N/A">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                For more details, check out the <a href="" target="_blank">GitHub repository</a>!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="assets/images/Bitcoin Hashing/bitcoin_hashing.jpg" alt="Bitcoin Hashing">
+                        <h3>Bitcoin Hashing</h3>
+                        <p class="project-intro">Bitcoin hashing using SHA-256 as a cryptographic process that secures transactions on the Bitcoin network.</p>
+
+                        <!-- hidden modal content -->
+                        <div class="project-details" style="display:none;">
+                            <h2>Bitcoin Hashing</h2>
+                            <p>
+                                This project demonstrates the implementation of Bitcoin's proof-of-work mechanism by simulating the SHA-256 hashing process used in Bitcoin mining. 
+                                The design is implemented in SystemVerilog and includes <strong>various configurations (serial and parallel)</strong> to explore different hashing methods.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/Bitcoin Hashing/serial.png" alt="Sonic Car 1">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                This project serves as an educational tool to understand the cryptographic processes behind Bitcoin mining, 
+                                focusing on the SHA-256 algorithm's role in securing transactions and maintaining the blockchain's integrity.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/Bitcoin Hashing/parallel.png" alt="Sonic Car 2">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                For more details, check out the <a href="https://github.com/NickJiEE/Bitcoin-Hashing" target="_blank">GitHub repository</a>!
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <img src="assets/images/3D Optical Lights/optical_lights.webp" alt="3D Optical Lights">
+                        <h3>3D Optical Lights</h3>
+                        <p class="project-intro">Homemade 3D optical lights with extensive functionalities.</p>
+
+                        <!-- hidden modal content -->
+                        <div class="project-details" style="display:none;">
+                            <h2>3D Optical Lights</h2>
+                            <p>
+                                to be added
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/3D Optical Lights/" alt="Sonic Car 1">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                to be added
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/3D Optical Lights/" alt="Sonic Car 2">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                For more details, check out the <a href="" target="_blank">GitHub repository</a>!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="assets/images/WearWise/WearWise.png" alt="WearWise">
+                        <h3>WearWise</h3>
+                        <p class="project-intro">WearWise, a smart IoT Wardrobe Management App</p>
+
+                        <!-- hidden modal content -->
+                        <div class="project-details" style="display:none;">
+                            <h2>WearWise</h2>
+                            <p>
+                                <strong>WearWise</strong> (IoT Wardrobe Management App) is a secure platform that lets users monitor personal environmental sensing devices and manage their wardrobe efficiently. 
+                                Through a robust authentication system, users can <strong>register ESP32 devices, track real-time temperature and humidity data, and visualize trends</strong> on an interactive dashboard. 
+                                The app also features an <strong>AI-powered assistant</strong> that provides outfit recommendations based on weather forecasts, while users can maintain a personalized wardrobe by adding, updating, or removing clothing items.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/WearWise/closet.jpg" alt="Sonic Car 1">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                <strong>Key Functionalities:</strong><br>
+                                • <strong>Secured User Info:</strong> Passwords are hashed and user data is protected in a secured database.<br>
+                                • <strong>User-Devices-Wardrobe Relationship:</strong> Users can customize device and clothing names, track their wardrobe, and update status in real time.<br>
+                                • <strong>Adding Devices via QR-Code:</strong> Quickly register sensors by scanning QR codes.<br>
+                                • <strong>Real-Time Sensor Data Display:</strong> Monitor live temperature readings from ESP32 devices with charts.<br>
+                                • <strong>Real-Time Weather Checking:</strong> Get localized weather forecasts to assist with outfit suggestions.<br>
+                                • <strong>Smart AI Secretary:</strong> Provides clothing recommendations based on wardrobe and environmental data.<br>
+                                • <strong>Two-Factor Authentication:</strong> Optional 2FA for enhanced account security.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/WearWise/weather.jpg" alt="Sonic Car 2">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                For more details, check out the <a href="https://github.com/NickJiEE/WearWise" target="_blank">GitHub repository</a>!
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="arrow right">&#10095;</button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2025 Nick Ji | <a href="https://github.com/nickjiee" target="_blank">GitHub</a></p>
+        </footer>
+    </div>
+
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <div id="lightbox">
+        <span class="close">&times;</span>
+        <img src="" alt="Zoomed image">
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
