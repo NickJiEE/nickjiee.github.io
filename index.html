@@ -11,17 +11,11 @@
     :root{
       --bg: #0a0a0a;
       --copper: #c07a3a;
-      --lit: rgb(0, 191, 255);
-      --glow: rgba(0, 191, 255, 0.8);
+      --lit: #00bfff;
+      --glow: #00bfff;
       --sep: rgba(0, 191, 255, 0.12);
-    }
-    
-    @supports (color: color(display-p3 0 0 0)) {
-      :root {
-        --lit: color(display-p3 0 0.749 1);
-        --glow: color(display-p3 0 0.749 1 / 0.8);
-        --sep: color(display-p3 0 0.749 1 / 0.12);
-      }
+      --glow-strength: 1;
+      --mobile-glow-strength: 1.5;
     }
     html,body{height:100%;margin:0;background:var(--bg);font-family:"Courier New",monospace}
 
@@ -85,12 +79,18 @@
     }
     #welcome .wl-char.on { 
       color:var(--lit); 
-      text-shadow: 0 0 10px var(--glow), 0 0 6px rgba(0,191,255,0.7); 
+      text-shadow: 
+        0 0 10px var(--glow),
+        0 0 20px var(--glow),
+        0 0 30px var(--glow);
       transform: translateY(-1px) scale(1.03); 
     }
     #welcome.welcome-on .wl-char { 
       color:var(--lit); 
-      text-shadow: 0 0 18px var(--glow); 
+      text-shadow: 
+        0 0 10px var(--glow),
+        0 0 20px var(--glow),
+        0 0 30px var(--glow);
     }
 
     /* The logo (SVG) */
@@ -117,7 +117,7 @@
     /* Final lit path style */
     .lit {
       stroke: var(--lit) !important;
-      filter: drop-shadow(0 0 8px var(--glow));
+      filter: drop-shadow(0 0 8px var(--glow)) drop-shadow(0 0 15px var(--glow));
     }
 
     .continue-btn-wrap {
@@ -194,6 +194,22 @@
     svg:focus { outline: none; }
 
     /* Responsive adjustments */
+    /* Enhance glow effects for mobile devices */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .lit {
+        filter: drop-shadow(0 0 10px var(--glow)) 
+                drop-shadow(0 0 20px var(--glow));
+      }
+      
+      #welcome .wl-char.on,
+      #welcome.welcome-on .wl-char {
+        text-shadow: 
+          0 0 15px var(--glow),
+          0 0 25px var(--glow),
+          0 0 35px var(--glow);
+      }
+    }
+
     @media (max-width: 768px) {
       body {
         padding: 10px;
