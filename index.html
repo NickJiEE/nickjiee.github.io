@@ -1,107 +1,386 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nick Ji | Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nick Ji - Electrical Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0a0a0a;
+      --copper: #c07a3a;
+      --lit: #00bfff;
+      --glow: rgba(0,191,255,0.8);
+      --sep: rgba(0,191,255,0.12);
+    }
+    html,body{height:100%;margin:0;background:var(--bg);font-family:"Courier New",monospace}
+
+    /* Background canvas full screen */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      display:block;
+    }
+
+    /* Center stage */
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      flex-direction: column;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .logo-wrap{
+      position: relative;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+      gap: 0;
+      margin: 0;
+    }
+
+    /* Welcome message */
+    #welcome {
+      font-size: 4vmin;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: #7fbdbd;
+      opacity: 0;
+      pointer-events: none;
+      display: inline-block;
+      text-align: center;
+      padding: 0;
+      animation: fadeIn 1s ease-in 6s forwards;
+    }
+    #welcome .wl-char { 
+      display:inline-block; 
+      transition: color 140ms, text-shadow 180ms, transform 120ms; 
+      font-weight:600; 
+    }
+    #welcome .wl-char.on { 
+      color:var(--lit); 
+      text-shadow: 0 0 10px var(--glow), 0 0 6px rgba(0,191,255,0.7); 
+      transform: translateY(-1px) scale(1.03); 
+    }
+    #welcome.welcome-on .wl-char { 
+      color:var(--lit); 
+      text-shadow: 0 0 18px var(--glow); 
+    }
+
+    /* The logo (SVG) */
+    #logo {
+      width: 55vmin;
+      max-width: 720px;
+      height: auto;
+      pointer-events: none;
+      display: block;
+      z-index: 4;
+    }
+
+    /* Paths initially hidden until they animate */
+    #logo path {
+      fill: none;
+      stroke: var(--copper);
+      stroke-width: 0.9 !important;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0;
+      transition: stroke 220ms ease;
+    }
+
+    /* Final lit path style */
+    .lit {
+      stroke: var(--lit) !important;
+      filter: drop-shadow(0 0 8px var(--glow));
+    }
+
+    /* Caption right below the name */
+    .intro-text {
+      margin-top: 3vmin;
+      color: var(--lit);
+      font-size: 2.2vmin;
+      opacity: 0;
+      animation: fadeIn 2s ease-in 6s forwards;
+      text-align: center;
+      pointer-events: none;
+      line-height: 1.4;
+      position: relative;
+      z-index: 4;
+    }
+
+    /* Continue button - appears after animation */
+    .continue-btn {
+      margin-top: 2rem;
+      padding: 12px 24px;
+      background: var(--lit);
+      color: #0a0a0a;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Inter', Arial, sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeIn 1s ease-in 6s forwards, pulse 2s infinite 12s;
+      transition: all 0.3s ease;
+      z-index: 4;
+      position: relative;
+    }
+
+    .continue-btn:hover {
+      background: #009acd;
+      color: white;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px var(--glow);
+    }
+
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    /* Skip button */
+    .skip-btn{
+      position: fixed;
+      right: 18px;
+      top: 18px;
+      z-index: 60;
+      background: transparent;
+      border: 1px solid rgba(0,191,255,0.28);
+      color: var(--lit);
+      padding: 8px 14px;
+      cursor: pointer;
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .skip-btn:hover {
+      background: rgba(0,191,255,0.1);
+      border-color: var(--lit);
+    }
+
+    svg:focus { outline: none; }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+        justify-content: flex-start;
+        align-items: center;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      .logo-wrap {
+        position: relative;
+        height: 100vh;
+        justify-content: center;
+        margin: 0;
+        gap: 0;
+      }
+
+      #welcome { 
+        font-size: 4.5vmin;
+        position: absolute;
+        top: 8vh;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        text-align: center;
+        z-index: 5;
+      }
+
+      #logo { 
+        width: 60vw;
+        max-width: 320px;
+        min-width: 280px;
+      }
+
+      .intro-text { 
+        font-size: 2.5vmin;
+        position: absolute;
+        bottom: 15vh;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        text-align: center;
+        z-index: 5;
+        margin-top: 0;
+      }
+
+      .continue-btn { 
+        padding: 12px 24px; 
+        font-size: 0.95rem;
+        position: absolute;
+        bottom: 25vh;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 5;
+        margin-top: 0;
+      }
+
+      .skip-btn {
+        top: 12px;
+        right: 12px;
+        padding: 6px 12px;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Very small phones */
+    @media (max-width: 480px) {
+      body {
+        padding: 8px;
+      }
+
+      .logo-wrap {
+        height: 100vh;
+        margin: 0;
+        gap: 0;
+      }
+
+      #welcome { 
+        font-size: 4vmin;
+        top: 6vh;
+      }
+
+      #logo { 
+        width: 70vw;
+        max-width: 280px;
+        min-width: 240px;
+      }
+
+      .intro-text { 
+        font-size: 3.2vmin;
+        bottom: 12vh;
+        line-height: 1.3;
+      }
+
+      .continue-btn { 
+        padding: 10px 20px; 
+        font-size: 0.9rem;
+        bottom: 20vh;
+      }
+
+      .skip-btn {
+        top: 10px;
+        right: 10px;
+        padding: 5px 10px;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Landscape phones */
+    @media (max-width: 768px) and (orientation: landscape) {
+      body {
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .logo-wrap {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      #welcome { 
+        position: absolute;
+        top: 5vh;
+        font-size: 3.5vmin;
+      }
+
+      #logo { 
+        width: 45vw;
+        max-width: 300px;
+      }
+
+      .intro-text { 
+        position: absolute;
+        bottom: 8vh;
+        font-size: 2.8vmin;
+      }
+
+      .continue-btn { 
+        position: absolute;
+        bottom: 2vh;
+        padding: 8px 16px;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="wrapper">
-        <!-- Navbar -->
-        <header>
-            <nav class="navbar">
-                <a href="index.html" class="logo">
-                    <img src="assets/images/logo_inv_thin.png" alt="Nick Ji Logo">
-                </a>
-                <div class="menu-toggle" id="menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
 
-        <!-- Hero Section -->
-        <main>
-            <section id="hero">
-                <h1>Hi, I’m Nick 👋</h1>
-                <p>Electrical Engineering student @ UCSD | Circuits, Systems, & Tech Enthusiast</p>
-                <a href="projects.html" class="btn">View My Work</a>
-            </section>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
-            <!-- Quick Intro -->
-            <section id="intro" style="max-width:800px; margin:60px auto; text-align:center;">
-                <h2>Welcome!</h2>
-                <p>
-                    I love building circuits, exploring systems, and solving problems with technology. 
-                    Whether it’s hardware design or experimenting with IoT, I enjoy the process of turning ideas into real, working projects.
-                </p>
-            </section>
+  <div class="logo-wrap">
+    <div id="welcome" aria-hidden="true"></div>
 
-            <!-- FAQ Section -->
-            <section id="faq">
-                <h2 style="text-align:center; margin-bottom:20px;">FAQ</h2>
+    <!-- Inline SVG -->
+    <svg id="logo" viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" overflow="visible">
+      <g id="layer1">
+        <path id="I2" style="fill:none;stroke:#ff0000;stroke-width:0.18042;stroke-opacity:1"
+          d="m 97.452769,46.601418 h 5.919271 V 37.722497 H 97.452769 V 34.76286 h 14.845921 v 2.959638 h -5.91927 v 8.878192 l 5.8954,0.0248 0.0254,2.935769 H 97.452908 Z"/>
+        <path id="J" style="fill:none;stroke:#ff0000;stroke-width:0.18042;stroke-opacity:1"
+          d="m 84.038919,49.554576 c -0.249421,-0.01791 -0.586124,-0.07469 -0.748225,-0.126244 -0.871948,-0.277206 -1.584364,-0.955778 -1.876711,-1.787556 -0.16596,-0.47218 -0.194477,-0.861991 -0.180806,-2.47145 l 0.0131,-1.551423 2.93577,-0.03212 c 3.9e-4,1.005209 2.88e-4,2.010418 0.0025,3.015626 h 4.467207 4.409592 l -0.0244,-8.855048 -5.89541,-0.02478 V 34.76267 h 8.878922 l -8.7e-4,6.074434 c -8.7e-4,6.734968 0.01279,6.428189 -0.316302,7.100746 -0.131413,0.268607 -0.271656,0.453828 -0.561521,0.741654 -0.440032,0.436919 -0.798285,0.647078 -1.338701,0.785289 -0.343042,0.08768 -0.593024,0.09329 -4.836334,0.107328 -2.461027,0.0079 -4.678665,1.76e-4 -4.928087,-0.01771 z"/>
+        <path id="K" style="fill:none;stroke:#ff0000;stroke-width:0.18042;stroke-opacity:1"
+          d="m 56.781599,34.76286 h 2.959639 v 5.967011 h 1.738344 l 2.913916,-2.90591 c 1.60265,-1.598243 2.967616,-2.935454 3.033254,-2.97157 0.09474,-0.05211 0.535248,-0.06866 2.136875,-0.08001 l 2.017533,-0.01427 -0.02531,2.988308 -2.913635,0.02535 -4.437488,4.438257 4.43922,4.386428 2.935769,0.0059 v 3.011221 l -1.99298,-0.01387 c -1.963897,-0.01368 -1.995925,-0.01545 -2.194548,-0.121599 -0.245506,-0.131183 -2.14093,-1.954315 -4.348113,-4.182258 l -1.637776,-1.653182 h -1.665137 v 5.967007 h -2.959636 z"/>
+        <path id="C" style="fill:none;stroke:#ff0000;stroke-width:0.18042;stroke-opacity:1"
+          d="m 43.027391,49.557666 c -0.357844,-0.05255 -0.765149,-0.199481 -1.080934,-0.389879 -0.395917,-0.238708 -0.943356,-0.839051 -1.137055,-1.24692 -0.311247,-0.655404 -0.304102,-0.523159 -0.304712,-5.639572 -3.25e-4,-2.752869 0.01813,-4.744505 0.04552,-4.9118 0.191701,-1.170607 0.952674,-2.072399 2.067382,-2.44995 l 0.392128,-0.132814 12.341148,-0.02647 -0.02531,2.986258 -11.814687,0.02402 v 8.830871 h 11.838556 v 3.007363 l -6.026684,-0.0059 c -3.314676,-0.003 -6.147624,-0.02362 -6.295439,-0.04527 z"/>
+        <path id="I1" style="fill:none;stroke:#ff0000;stroke-width:0.18042;stroke-opacity:1"
+          d="m 24.273306,46.601418 h 5.919278 v -8.831183 h -5.929416 c 3.8e-4,-1.010676 0.01825,-2.000878 0.01808,-3.007375 h 14.790217 v 3.007375 H 33.15218 v 8.831183 h 5.919278 v 3.007373 H 24.273245 Z"/>
+        <path id="N" style="fill:none;stroke:#ff0000;stroke-width:0.18042;stroke-opacity:1"
+          d="m 7.9213289,49.548248 c -0.01306,-0.03405 -0.017883,-3.09006 -0.010695,-6.791139 l 0.01306,-6.729242 0.1089986,-0.269571 C 8.179134,35.396121 8.463822,35.08403 8.7965763,34.920899 c 0.3649259,-0.17891 0.9103558,-0.186882 1.2752417,-0.01863 0.196036,0.09041 1.083316,0.955924 4.96595,4.844248 l 4.727271,4.734201 -0.0014,-4.846981 -0.0014,-4.846985 3.031242,-0.02535 v 6.697566 c 0,7.375657 0.0142,7.01293 -0.293201,7.49197 -0.385347,0.600609 -1.221752,0.827823 -1.887659,0.512894 -0.258926,-0.122463 -1.016229,-0.860751 -6.404774,-6.244001 l -3.313214,-3.30996 0.01822,4.837514 0.01822,4.837514 -1.4929858,0.01269 c -1.1881242,0.01004 -1.4978401,-5.9e-4 -1.5167428,-0.04931 z"/>
+      </g>
+    </svg>
 
-                <div class="faq-item">
-                    <div class="faq-question">What are your main areas of interest? <i>▼</i></div>
-                    <div class="faq-answer">I’m passionate about integrated circuits, digital systems, and applying technology to solve real-world problems.</div>
-                </div>
+    <button class="continue-btn" onclick="goToMainSite()" style="pointer-events: auto;">
+      Enter Portfolio
+    </button>
+  </div>
 
-                <div class="faq-item">
-                    <div class="faq-question">Do you have experience with hardware design? <i>▼</i></div>
-                    <div class="faq-answer">Yes! I’ve worked on CMOS-based adders, microcontroller-based games, and IoT systems using ESP32.</div>
-                </div>
+  <div class="intro-text">
+    <div>Electrical Engineer</div>
+    <div>IC Design • Circuits & Systems</div>
+  </div>
 
-                <div class="faq-item">
-                    <div class="faq-question">Do you have experience with teamwork and leadership? <i>▼</i></div>
-                    <div class="faq-answer">
-                        Yes! I’ve collaborated with teammates from diverse majors and backgrounds, and I’ve also taken on leadership roles to guide groups toward successfully completing projects.
-                    </div>
-                </div>
+  <button class="skip-btn" onclick="skipAnimation()">Skip</button>
 
-                <div class="faq-item">
-                    <div class="faq-question">What motivates you to work on new projects? <i>▼</i></div>
-                    <div class="faq-answer">I love the challenge of turning abstract ideas into real solutions. The process of experimenting, debugging, and finally seeing something work is what keeps me motivated.</div>
-                </div>
+<style>
+@keyframes pulse {
+  0%, 100% { 
+    transform: scale(1); 
+    box-shadow: 0 0 20px rgba(0,191,255,0.3); 
+  }
+  50% { 
+    transform: scale(1.05); 
+    box-shadow: 0 0 30px rgba(0,191,255,0.6); 
+  }
+}
 
-                <div class="faq-item">
-                    <div class="faq-question">What’s your favorite project so far? <i>▼</i></div>
-                    <div class="faq-answer">
-                        One of my favorite projects was designing the “3D Optical Lights.” It’s a lamp that creates a three-dimensional effect using an acrylic board, 
-                        enhanced with features like continuous updates on GitHub, customizable lighting controls through an all-in-one app, and preset modes for different moods and settings.
-                    </div>
-                </div>
+@media (max-width: 768px) {
+  @keyframes pulse {
+    0%, 100% { 
+      transform: translateX(-50%) scale(1); 
+      box-shadow: 0 0 20px rgba(0,191,255,0.3); 
+    }
+    50% { 
+      transform: translateX(-50%) scale(1.05); 
+      box-shadow: 0 0 30px rgba(0,191,255,0.6); 
+    }
+  }
+}
+</style>
 
-                 <div class="faq-item">
-                    <div class="faq-question">What are your future goals? <i>▼</i></div>
-                    <div class="faq-answer">
-                        I plan to keep expanding my knowledge in circuits, embedded systems, and AI, 
-                        with a long-term goal of developing impactful technologies for space exploration, such as innovations that improve life here on Earth while helping humanity reach further into the unknown.
-                    </div>
-                </div>
+<script src="js/intro.js"></script>
 
-                <div class="faq-item">
-                    <div class="faq-question">How can I collaborate with you? <i>▼</i></div>
-                    <div class="faq-answer">Feel free to reach out through my <a href="contact.html" style="text-decoration: none; color: rgb(80, 162, 255);">Contact page</a> or connect with me on LinkedIn or GitHub!</div>
-                </div>
-            </section>
-        </main>
-
-        <!-- Footer -->
-        <footer>
-            <p>© 2025 Nick Ji | <a href="https://github.com/nickjiee" target="_blank">GitHub</a></p>
-        </footer>
-    </div>
-
-    <script src="js/menu.js"></script>
-    <script src="js/FAQ.js"></script>
 </body>
 </html>
