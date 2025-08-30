@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light dark">
   <title>Nick Ji</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
@@ -39,15 +40,15 @@
       box-sizing: border-box;
     }
 
-    .logo-wrap{
-      position: relative;
-      z-index: 4;
+    .logo-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-      pointer-events: none;
-      gap: 0;
-      margin: 0;
+      gap: 2rem;
+      position: relative;
+      z-index: 4;
+      margin-top: 20vh; /* Move logo down to leave space for welcome */
+      margin-bottom: 20vh; /* More space below for continue button and intro text */
     }
 
     /* Welcome message */
@@ -61,7 +62,13 @@
       display: inline-block;
       text-align: center;
       padding: 0;
+      position: fixed;
+      top: 12vh;
+      left: 50%;
+      transform: translateX(-50%);
       animation: fadeIn 1s ease-in 6s forwards;
+      z-index: 5;
+      width: 100%;
     }
     #welcome .wl-char { 
       display:inline-block; 
@@ -105,37 +112,28 @@
       filter: drop-shadow(0 0 8px var(--glow));
     }
 
-    /* Caption right below the name */
-    .intro-text {
-      margin-top: 3vmin;
-      color: var(--lit);
-      font-size: 2.2vmin;
-      opacity: 0;
-      animation: fadeIn 2s ease-in 6s forwards;
-      text-align: center;
-      pointer-events: none;
-      line-height: 1.4;
-      position: relative;
+    .continue-btn-wrap {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      position: fixed;
+      bottom: 15vh;
       z-index: 4;
     }
 
     /* Continue button - appears after animation */
     .continue-btn {
-      margin-top: 2rem;
       padding: 12px 24px;
       background: var(--lit);
-      color: #0a0a0a;
-      border: none;
       border-radius: 8px;
-      font-family: 'Inter', Arial, sans-serif;
+      border: none;
       font-weight: 600;
       font-size: 1rem;
       cursor: pointer;
       opacity: 0;
       animation: fadeIn 1s ease-in 6s forwards, pulse 2s infinite 12s;
+      transform-origin: center;
       transition: all 0.3s ease;
-      z-index: 4;
-      position: relative;
     }
 
     .continue-btn:hover {
@@ -146,6 +144,22 @@
     }
 
     @keyframes fadeIn { to { opacity: 1; } }
+
+    .intro-text {
+      position: fixed;
+      bottom: 5vh;         /* closer to bottom of screen */
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 2.2vmin;
+      line-height: 1.4;
+      color: var(--lit);
+      opacity: 0;
+      animation: fadeIn 2s ease-in 6s forwards;
+      z-index: 3;
+      width: 90%;
+      max-width: 800px;
+    }
 
     /* Skip button */
     .skip-btn{
@@ -182,17 +196,18 @@
       }
 
       .logo-wrap {
-        position: relative;
-        height: 100vh;
-        justify-content: center;
-        margin: 0;
-        gap: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        margin-top: 25vh;
+        margin-bottom: 0;
       }
 
       #welcome { 
         font-size: 4.5vmin;
-        position: absolute;
-        top: 8vh;
+        position: fixed;
+        top: 15vh;
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
@@ -206,10 +221,14 @@
         min-width: 280px;
       }
 
+      .continue-btn-wrap {
+        bottom: 25vh;
+      }
+
       .intro-text { 
         font-size: 2.5vmin;
-        position: absolute;
-        bottom: 15vh;
+        position: fixed;
+        bottom: 10vh;
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
@@ -218,15 +237,10 @@
         margin-top: 0;
       }
 
-      .continue-btn { 
-        padding: 12px 24px; 
-        font-size: 0.95rem;
-        position: absolute;
-        bottom: 25vh;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 5;
-        margin-top: 0;
+      .continue-btn {
+        margin-top: auto;
+        position: relative;
+        transform: none;
       }
 
       .skip-btn {
@@ -244,13 +258,13 @@
       }
 
       .logo-wrap {
-        height: 100vh;
-        margin: 0;
-        gap: 0;
+        margin-top: 15vh;
+        margin-bottom: 25vh;
+        gap: 3rem;
       }
 
       #welcome { 
-        font-size: 4vmin;
+        font-size: 5vmin;
         top: 6vh;
       }
 
@@ -260,16 +274,19 @@
         min-width: 240px;
       }
 
+      .continue-btn-wrap {
+        bottom: 22vh;
+      }
+
       .intro-text { 
-        font-size: 3.2vmin;
-        bottom: 12vh;
+        font-size: 3.8vmin;
+        bottom: 8vh;
         line-height: 1.3;
       }
 
       .continue-btn { 
         padding: 10px 20px; 
         font-size: 0.9rem;
-        bottom: 20vh;
       }
 
       .skip-btn {
@@ -326,26 +343,30 @@
     <div id="welcome" aria-hidden="true"></div>
 
     <!-- Inline SVG -->
-    <svg id="logo" viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" overflow="visible">
+    <svg id="logo" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" overflow="visible">
       <g id="layer1">
         <path id="I2" style="fill:none;stroke:#ff0000;stroke-width:0.18042;stroke-opacity:1"
-          d="m 97.452769,46.601418 h 5.919271 V 37.722497 H 97.452769 V 34.76286 h 14.845921 v 2.959638 h -5.91927 v 8.878192 l 5.8954,0.0248 0.0254,2.935769 H 97.452908 Z"/>
+          d="m 97.452769,24.415583 h 5.919271 v -8.878921 h -5.919271 v -2.959637 h 14.845921 v 2.959638 h -5.91927 v 8.878192 l 5.8954,0.0248 0.0254,2.935769 H 97.452908 Z"/>
         <path id="J" style="fill:none;stroke:#ff0000;stroke-width:0.18042;stroke-opacity:1"
-          d="m 84.038919,49.554576 c -0.249421,-0.01791 -0.586124,-0.07469 -0.748225,-0.126244 -0.871948,-0.277206 -1.584364,-0.955778 -1.876711,-1.787556 -0.16596,-0.47218 -0.194477,-0.861991 -0.180806,-2.47145 l 0.0131,-1.551423 2.93577,-0.03212 c 3.9e-4,1.005209 2.88e-4,2.010418 0.0025,3.015626 h 4.467207 4.409592 l -0.0244,-8.855048 -5.89541,-0.02478 V 34.76267 h 8.878922 l -8.7e-4,6.074434 c -8.7e-4,6.734968 0.01279,6.428189 -0.316302,7.100746 -0.131413,0.268607 -0.271656,0.453828 -0.561521,0.741654 -0.440032,0.436919 -0.798285,0.647078 -1.338701,0.785289 -0.343042,0.08768 -0.593024,0.09329 -4.836334,0.107328 -2.461027,0.0079 -4.678665,1.76e-4 -4.928087,-0.01771 z"/>
+          d="m 84.038919,27.368741 c -0.249421,-0.01791 -0.586124,-0.07469 -0.748225,-0.126244 -0.871948,-0.277206 -1.584364,-0.955778 -1.876711,-1.787556 -0.16596,-0.47218 -0.194477,-0.861991 -0.180806,-2.47145 l 0.0131,-1.551423 2.93577,-0.03212 c 3.9e-4,1.005209 2.88e-4,2.010418 0.0025,3.015626 h 4.467207 4.409592 l -0.0244,-8.855048 -5.89541,-0.02478 v -2.958911 h 8.878922 l -8.7e-4,6.074434 c -8.7e-4,6.734968 0.01279,6.428189 -0.316302,7.100746 -0.131413,0.268607 -0.271656,0.453828 -0.561521,0.741654 -0.440032,0.436919 -0.798285,0.647078 -1.338701,0.785289 -0.343042,0.08768 -0.593024,0.09329 -4.836334,0.107328 -2.461027,0.0079 -4.678665,1.76e-4 -4.928087,-0.01771 z"/>
         <path id="K" style="fill:none;stroke:#ff0000;stroke-width:0.18042;stroke-opacity:1"
-          d="m 56.781599,34.76286 h 2.959639 v 5.967011 h 1.738344 l 2.913916,-2.90591 c 1.60265,-1.598243 2.967616,-2.935454 3.033254,-2.97157 0.09474,-0.05211 0.535248,-0.06866 2.136875,-0.08001 l 2.017533,-0.01427 -0.02531,2.988308 -2.913635,0.02535 -4.437488,4.438257 4.43922,4.386428 2.935769,0.0059 v 3.011221 l -1.99298,-0.01387 c -1.963897,-0.01368 -1.995925,-0.01545 -2.194548,-0.121599 -0.245506,-0.131183 -2.14093,-1.954315 -4.348113,-4.182258 l -1.637776,-1.653182 h -1.665137 v 5.967007 h -2.959636 z"/>
+          d="m 56.781599,12.577025 h 2.959639 v 5.967011 h 1.738344 l 2.913916,-2.90591 c 1.60265,-1.598243 2.967616,-2.935454 3.033254,-2.97157 0.09474,-0.05211 0.535248,-0.06866 2.136875,-0.08001 l 2.017533,-0.01427 -0.02531,2.988308 -2.913635,0.02535 -4.437488,4.438257 4.43922,4.386428 2.935769,0.0059 v 3.011221 l -1.99298,-0.01387 c -1.963897,-0.01368 -1.995925,-0.01545 -2.194548,-0.121599 -0.245506,-0.131183 -2.14093,-1.954315 -4.348113,-4.182258 l -1.637776,-1.653182 h -1.665137 v 5.967007 h -2.959636 z"/>
         <path id="C" style="fill:none;stroke:#ff0000;stroke-width:0.18042;stroke-opacity:1"
-          d="m 43.027391,49.557666 c -0.357844,-0.05255 -0.765149,-0.199481 -1.080934,-0.389879 -0.395917,-0.238708 -0.943356,-0.839051 -1.137055,-1.24692 -0.311247,-0.655404 -0.304102,-0.523159 -0.304712,-5.639572 -3.25e-4,-2.752869 0.01813,-4.744505 0.04552,-4.9118 0.191701,-1.170607 0.952674,-2.072399 2.067382,-2.44995 l 0.392128,-0.132814 12.341148,-0.02647 -0.02531,2.986258 -11.814687,0.02402 v 8.830871 h 11.838556 v 3.007363 l -6.026684,-0.0059 c -3.314676,-0.003 -6.147624,-0.02362 -6.295439,-0.04527 z"/>
+          d="M 43.027391,27.371831 C 42.669547,27.319281 42.262242,27.17235 41.946457,26.981952 41.55054,26.743244 41.003101,26.142901 40.809402,25.735032 40.498155,25.079628 40.5053,25.211873 40.50469,20.09546 c -3.25e-4,-2.752869 0.01813,-4.744505 0.04552,-4.9118 0.191701,-1.170607 0.952674,-2.072399 2.067382,-2.44995 l 0.392128,-0.132814 12.341148,-0.02647 -0.02531,2.986258 -11.814687,0.02402 v 8.830871 h 11.838556 v 3.007363 l -6.026684,-0.0059 c -3.314676,-0.003 -6.147624,-0.02362 -6.295439,-0.04527 z"/>
         <path id="I1" style="fill:none;stroke:#ff0000;stroke-width:0.18042;stroke-opacity:1"
-          d="m 24.273306,46.601418 h 5.919278 v -8.831183 h -5.929416 c 3.8e-4,-1.010676 0.01825,-2.000878 0.01808,-3.007375 h 14.790217 v 3.007375 H 33.15218 v 8.831183 h 5.919278 v 3.007373 H 24.273245 Z"/>
+          d="m 24.273306,24.415583 h 5.919278 V 15.5844 h -5.929416 c 3.8e-5,-1.010676 0.01825,-2.000878 0.01808,-3.007375 H 39.071465 V 15.5844 H 33.15218 v 8.831183 h 5.919278 v 3.007373 H 24.273245 Z"/>
         <path id="N" style="fill:none;stroke:#ff0000;stroke-width:0.18042;stroke-opacity:1"
-          d="m 7.9213289,49.548248 c -0.01306,-0.03405 -0.017883,-3.09006 -0.010695,-6.791139 l 0.01306,-6.729242 0.1089986,-0.269571 C 8.179134,35.396121 8.463822,35.08403 8.7965763,34.920899 c 0.3649259,-0.17891 0.9103558,-0.186882 1.2752417,-0.01863 0.196036,0.09041 1.083316,0.955924 4.96595,4.844248 l 4.727271,4.734201 -0.0014,-4.846981 -0.0014,-4.846985 3.031242,-0.02535 v 6.697566 c 0,7.375657 0.0142,7.01293 -0.293201,7.49197 -0.385347,0.600609 -1.221752,0.827823 -1.887659,0.512894 -0.258926,-0.122463 -1.016229,-0.860751 -6.404774,-6.244001 l -3.313214,-3.30996 0.01822,4.837514 0.01822,4.837514 -1.4929858,0.01269 c -1.1881242,0.01004 -1.4978401,-5.9e-4 -1.5167428,-0.04931 z"/>
+          d="m 7.9213289,27.362413 c -0.01306,-0.03405 -0.017883,-3.09006 -0.010695,-6.791139 l 0.01306,-6.729242 0.1089986,-0.269571 c 0.1464415,-0.362175 0.4311295,-0.674266 0.7638838,-0.837397 0.3649259,-0.17891 0.9103558,-0.186882 1.2752417,-0.01863 0.196036,0.09041 1.083316,0.955924 4.96595,4.844248 l 4.727271,4.734201 -0.0014,-4.846981 -0.0014,-4.846985 3.031242,-0.02535 v 6.697566 c 0,7.375657 0.0142,7.01293 -0.293201,7.49197 -0.385347,0.600609 -1.221752,0.827823 -1.887659,0.512894 -0.258926,-0.122463 -1.016229,-0.860751 -6.404774,-6.244001 l -3.313214,-3.30996 0.01822,4.837514 0.01822,4.837514 -1.4929858,0.01269 c -1.1881242,0.01004 -1.4978401,-5.9e-5 -1.5167428,-0.04931 z"/>
       </g>
     </svg>
 
-    <button class="continue-btn" onclick="goToMainSite()" style="pointer-events: auto;">
-      Enter Portfolio
-    </button>
+
+    <div class="continue-btn-wrap">
+      <button class="continue-btn" onclick="goToMainSite()" style="pointer-events: auto;">
+        Enter Portfolio
+      </button>
+    </div>
+    
   </div>
 
   <div class="intro-text">
@@ -364,19 +385,6 @@
   50% { 
     transform: scale(1.05); 
     box-shadow: 0 0 30px rgba(0,191,255,0.6); 
-  }
-}
-
-@media (max-width: 768px) {
-  @keyframes pulse {
-    0%, 100% { 
-      transform: translateX(-50%) scale(1); 
-      box-shadow: 0 0 20px rgba(0,191,255,0.3); 
-    }
-    50% { 
-      transform: translateX(-50%) scale(1.05); 
-      box-shadow: 0 0 30px rgba(0,191,255,0.6); 
-    }
   }
 }
 </style>
