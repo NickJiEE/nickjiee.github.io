@@ -8,14 +8,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
   <style>
-    :root{
+    :root {
       --bg: #0a0a0a;
       --copper: #c07a3a;
       --lit: #00bfff;
-      --glow: #00bfff;
+      --glow: rgba(0, 191, 255, 1);
+      --glow-soft: rgba(0, 191, 255, 0.7);
       --sep: rgba(0, 191, 255, 0.12);
-      --glow-strength: 1;
-      --mobile-glow-strength: 1.5;
+    }
+
+    /* iOS specific colors */
+    @supports (-webkit-touch-callout: none) {
+      :root {
+        --lit: #007FFF;  /* iOS blue */
+        --glow: rgba(0, 127, 255, 1);
+        --glow-soft: rgba(0, 127, 255, 0.7);
+      }
     }
     html,body{height:100%;margin:0;background:var(--bg);font-family:"Courier New",monospace}
 
@@ -78,19 +86,21 @@
       font-weight:600; 
     }
     #welcome .wl-char.on { 
-      color:var(--lit); 
+      color: var(--lit); 
+      -webkit-text-stroke: 1px var(--glow-soft);
       text-shadow: 
+        0 0 5px var(--glow),
         0 0 10px var(--glow),
-        0 0 20px var(--glow),
-        0 0 30px var(--glow);
+        0 0 15px var(--glow);
       transform: translateY(-1px) scale(1.03); 
     }
     #welcome.welcome-on .wl-char { 
-      color:var(--lit); 
+      color: var(--lit); 
+      -webkit-text-stroke: 1px var(--glow-soft);
       text-shadow: 
+        0 0 5px var(--glow),
         0 0 10px var(--glow),
-        0 0 20px var(--glow),
-        0 0 30px var(--glow);
+        0 0 15px var(--glow);
     }
 
     /* The logo (SVG) */
@@ -117,7 +127,10 @@
     /* Final lit path style */
     .lit {
       stroke: var(--lit) !important;
-      filter: drop-shadow(0 0 8px var(--glow)) drop-shadow(0 0 15px var(--glow));
+      filter: drop-shadow(0 0 4px var(--glow)) 
+              drop-shadow(0 0 8px var(--glow));
+      -webkit-filter: drop-shadow(0 0 4px var(--glow)) 
+                     drop-shadow(0 0 8px var(--glow));
     }
 
     .continue-btn-wrap {
@@ -194,20 +207,32 @@
     svg:focus { outline: none; }
 
     /* Responsive adjustments */
-    /* Enhance glow effects for mobile devices */
-    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* iPhone specific styles */
+    @media screen and (max-width: 430px) and (-webkit-min-device-pixel-ratio: 2) {
       .lit {
-        filter: drop-shadow(0 0 10px var(--glow)) 
-                drop-shadow(0 0 20px var(--glow));
+        stroke-width: 1.2 !important;
+        filter: drop-shadow(0 0 3px var(--glow)) 
+                drop-shadow(0 0 6px var(--glow));
+        -webkit-filter: drop-shadow(0 0 3px var(--glow)) 
+                       drop-shadow(0 0 6px var(--glow));
       }
       
       #welcome .wl-char.on,
       #welcome.welcome-on .wl-char {
+        color: var(--lit);
+        -webkit-text-stroke: 1px var(--glow);
         text-shadow: 
-          0 0 15px var(--glow),
-          0 0 25px var(--glow),
-          0 0 35px var(--glow);
+          0 0 4px var(--glow),
+          0 0 8px var(--glow);
       }
+    }
+
+    /* Add webkit backface visibility to help with text rendering */
+    * {
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      backface-visibility: hidden;
     }
 
     @media (max-width: 768px) {
