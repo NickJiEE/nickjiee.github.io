@@ -11,9 +11,17 @@
     :root{
       --bg: #0a0a0a;
       --copper: #c07a3a;
-      --lit: #00bfff;
-      --glow: rgba(0,191,255,0.8);
-      --sep: rgba(0,191,255,0.12);
+      --lit: rgb(0, 191, 255);
+      --glow: rgba(0, 191, 255, 0.8);
+      --sep: rgba(0, 191, 255, 0.12);
+    }
+    
+    @supports (color: color(display-p3 0 0 0)) {
+      :root {
+        --lit: color(display-p3 0 0.749 1);
+        --glow: color(display-p3 0 0.749 1 / 0.8);
+        --sep: color(display-p3 0 0.749 1 / 0.12);
+      }
     }
     html,body{height:100%;margin:0;background:var(--bg);font-family:"Courier New",monospace}
 
@@ -56,7 +64,7 @@
       font-size: 4vmin;
       line-height: 1;
       letter-spacing: 0.02em;
-      color: #7fbdbd;
+      color: rgb(127, 189, 189);
       opacity: 0;
       pointer-events: none;
       display: inline-block;
