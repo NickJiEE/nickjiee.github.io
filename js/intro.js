@@ -228,7 +228,9 @@
   const dots = createDots(12);
   const minDim = Math.min(window.innerWidth, window.innerHeight);
   const cellSize = Math.max(8, Math.floor(minDim / 45));
-  const desired = Math.min(220, Math.max(60, Math.floor((window.innerWidth*window.innerHeight)/(cellSize*cellSize*30))));
+  const desired = reduced
+  ? Math.min(40, Math.max(12, Math.floor((window.innerWidth * window.innerHeight) / (cellSize * cellSize * 120))))
+  : Math.min(220, Math.max(60, Math.floor((window.innerWidth * window.innerHeight) / (cellSize * cellSize * 30))));
 
   const circuitsObj = makeCircuits(cellSize, desired);
   const thingsRenderer = makeThingsRenderer(window.innerWidth, window.innerHeight);
@@ -265,10 +267,6 @@
     drawSeparators();
   }
   drawStaticBase();
-
-  if (reduced) {
-    return;
-  }
 
   let last = performance.now();
   function loop(now) {
