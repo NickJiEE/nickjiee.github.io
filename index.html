@@ -8,16 +8,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
   <style>
-    :root{
+    :root {
       --bg: #0a0a0a;
       --copper: #c07a3a;
       --lit: #00bfff;
       --glow: #00bfff;
-      --sep: rgba(0, 191, 255, 0.12);
-      --glow-strength: 1;
-      --mobile-glow-strength: 1.5;
     }
-    html,body{height:100%;margin:0;background:var(--bg);font-family:"Courier New",monospace}
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      font-family: "Courier New", monospace;
+    }
 
     /* Background canvas full screen */
     #bg-canvas {
@@ -27,7 +30,7 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      display:block;
+      display: block;
     }
 
     /* Center stage */
@@ -49,8 +52,8 @@
       gap: 2rem;
       position: relative;
       z-index: 4;
-      margin-top: 20vh; /* Move logo down to leave space for welcome */
-      margin-bottom: 20vh; /* More space below for continue button and intro text */
+      margin-top: 20vh;
+      margin-bottom: 20vh;
     }
 
     /* Welcome message */
@@ -114,7 +117,6 @@
       transition: stroke 220ms ease;
     }
 
-    /* Final lit path style */
     .lit {
       stroke: var(--lit) !important;
       filter: drop-shadow(0 0 8px var(--glow)) drop-shadow(0 0 15px var(--glow));
@@ -129,7 +131,7 @@
       z-index: 4;
     }
 
-    /* Continue button - appears after animation */
+    /* Continue button */
     .continue-btn {
       padding: 12px 24px;
       background: var(--lit);
@@ -152,10 +154,20 @@
     }
 
     @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes pulse {
+      0%, 100% { 
+        transform: scale(1); 
+        box-shadow: 0 0 20px rgba(0,191,255,0.3); 
+      }
+      50% { 
+        transform: scale(1.05); 
+        box-shadow: 0 0 30px rgba(0,191,255,0.6); 
+      }
+    }
 
     .intro-text {
       position: fixed;
-      bottom: 5vh;         /* closer to bottom of screen */
+      bottom: 5vh;
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
@@ -170,7 +182,7 @@
     }
 
     /* Skip button */
-    .skip-btn{
+    .skip-btn {
       position: fixed;
       right: 18px;
       top: 18px;
@@ -190,8 +202,6 @@
       background: rgba(0,191,255,0.1);
       border-color: var(--lit);
     }
-
-    svg:focus { outline: none; }
 
     /* Responsive adjustments */
     /* Enhance glow effects for mobile devices */
@@ -220,9 +230,6 @@
       }
 
       .logo-wrap {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         height: auto;
         margin-top: 25vh;
         margin-bottom: 0;
@@ -358,6 +365,7 @@
       }
     }
   </style>
+
 </head>
 <body>
 
@@ -399,19 +407,6 @@
   </div>
 
   <button class="skip-btn" onclick="skipAnimation()">Skip</button>
-
-<style>
-@keyframes pulse {
-  0%, 100% { 
-    transform: scale(1); 
-    box-shadow: 0 0 20px rgba(0,191,255,0.3); 
-  }
-  50% { 
-    transform: scale(1.05); 
-    box-shadow: 0 0 30px rgba(0,191,255,0.6); 
-  }
-}
-</style>
 
 <script src="js/intro.js"></script>
 
