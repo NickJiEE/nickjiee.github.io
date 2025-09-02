@@ -189,6 +189,29 @@ main { flex: 1; }
 .timeline-item { margin-bottom: 20px; }
 .timeline-item h3 { margin-bottom: 5px; }
 
+/* Skills animation styles */
+.skill {
+  background: #f0faff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  transition: all 0.4s ease;
+}
+
+.skill.animate {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Add a subtle hover effect for enhanced interactivity */
+.skill:hover {
+  background: #e0f4ff;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 191, 255, 0.2);
+}
+
 /* Contact Wrapper Layout */
 #contact-wrapper {
   display: flex;
