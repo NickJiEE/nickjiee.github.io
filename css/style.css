@@ -185,9 +185,300 @@ main { flex: 1; }
 .skills { max-width: 800px; margin: 50px auto; text-align: center; }
 .skills-list { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; }
 .skill { background: #f0faff; padding: 10px 20px; border-radius: 8px; font-weight: 600; }
-.timeline { max-width: 800px; margin: 50px auto; }
-.timeline-item { margin-bottom: 20px; }
-.timeline-item h3 { margin-bottom: 5px; }
+
+.timeline {
+  max-width: 800px;
+  margin: 50px auto;
+  position: relative;
+  padding: 40px 0;
+}
+
+/* Central timeline line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, 
+    rgba(0, 191, 255, 0.3) 0%,
+    #00bfff 5%,
+    #009acd 95%,
+    rgba(0, 155, 205, 0.3) 100%
+  );
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 1s ease;
+  border-radius: 2px;
+}
+
+.timeline.animate::before {
+  opacity: 1;
+  box-shadow: 0 0 8px rgba(0, 191, 255, 0.3);
+}
+
+/* Timeline items container */
+.timeline-item {
+  position: relative;
+  margin-bottom: 60px;
+  display: flex;
+  align-items: flex-start;
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+
+.timeline-item.animate {
+  opacity: 1;
+}
+
+/* Alternate left/right positioning */
+.timeline-item:nth-child(odd) {
+  justify-content: flex-end;
+  transform: translateX(-50px);
+}
+
+.timeline-item:nth-child(even) {
+  justify-content: flex-start;
+  transform: translateX(50px);
+}
+
+.timeline-item:nth-child(odd).animate {
+  transform: translateX(0);
+}
+
+.timeline-item:nth-child(even).animate {
+  transform: translateX(0);
+}
+
+
+/* Timeline content boxes */
+.timeline-content {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 25px;
+  width: 48%;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 120px;
+}
+
+.timeline-content:hover {
+  box-shadow: 0 6px 20px rgba(0,191,255,0.2);
+  transform: translateY(-2px);
+}
+
+/* Arrows pointing to center line */
+.timeline-item:nth-child(odd) .timeline-content::after {
+  content: '';
+  position: absolute;
+  right: -15px;
+  top: 15px; /* Align with node position */
+  border: 15px solid transparent;
+  border-left-color: #fff;
+}
+
+.timeline-item:nth-child(even) .timeline-content::after {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 15px; /* Align with node position */
+  border: 15px solid transparent;
+  border-right-color: #fff;
+}
+
+.timeline::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -20px;
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, #00bfff, #009acd);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  transform: translateX(-50%) scale(0);
+  box-shadow: 0 0 0 0 rgba(0, 191, 255, 0.4);
+  transition: all 1s ease 0.3s; /* Delay to appear after line */
+  z-index: 3;
+}
+
+.timeline.animate::after {
+  transform: translateX(-50%) scale(1);
+  animation: pulseStart 2s ease-in-out 1.5s infinite;
+}
+
+/* Timeline end indicator (bottom) */
+.timeline-end-marker {
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #009acd, #007bb5);
+  border: 4px solid #fff;
+  border-radius: 50%;
+  transform: translateX(-50%) scale(0);
+  box-shadow: 0 0 0 0 rgba(0, 155, 205, 0.4);
+  transition: all 1.2s ease 1s; /* Later delay for staggered effect */
+  z-index: 3;
+}
+
+.timeline.animate .timeline-end-marker {
+  transform: translateX(-50%) scale(1);
+  animation: pulseEnd 2.5s ease-in-out 2s infinite;
+}
+
+/* Timeline nodes (circles) */
+.timeline-node {
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  width: 20px;
+  height: 20px;
+  background: #00bfff;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.timeline-node:hover,
+.timeline-item.expanded .timeline-node {
+  width: 24px;
+  height: 24px;
+  background: #009acd;
+  box-shadow: 0 0 0 8px rgba(0,191,255,0.2);
+}
+
+/* Timeline headers and content */
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.timeline-date {
+  font-size: 0.9rem;
+  color: #00bfff;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.timeline-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  flex: 1;
+  margin-left: 15px;
+}
+
+.timeline-brief {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+
+/* Expandable detailed content */
+.timeline-details {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.4s ease;
+  margin-top: 0;
+}
+
+.timeline-item.expanded .timeline-details {
+  max-height: 300px;
+  opacity: 1;
+  margin-top: 15px;
+}
+
+.timeline-details p {
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Expand indicator */
+.expand-indicator {
+  color: #00bfff;
+  font-size: 0.8rem;
+  margin-top: 8px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.timeline-item.expanded .expand-indicator {
+  color: #009acd;
+}
+
+/* Pulse animations for the indicators */
+@keyframes pulseStart {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 191, 255, 0.4);
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(0, 191, 255, 0);
+    transform: translateX(-50%) scale(1.1);
+  }
+}
+
+@keyframes pulseEnd {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 155, 205, 0.4);
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(0, 155, 205, 0);
+    transform: translateX(-50%) scale(1.15);
+  }
+}
+
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #00bfff, #009acd);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(0, 191, 255, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 191, 255, 0.4);
+  background: linear-gradient(135deg, #009acd, #007bb5);
+}
 
 /* Skills animation styles */
 .skill {
@@ -532,9 +823,52 @@ footer a:hover { color: #fff; }
     .section-card .section-title { font-size: 1.5rem; }
     .section-card p { font-size: 0.95rem; line-height: 1.6; text-align: center; }
 
-    .timeline { padding: 0 30px; }
-    .timeline-item h3 { font-size: 1rem; }
-    .timeline-item p { font-size: 0.9rem; line-height: 1.5; }
+    .timeline::before {
+      left: 30px;
+    }
+    
+    .timeline-item {
+      justify-content: flex-start !important;
+      transform: translateX(50px) !important;
+      padding-left: 60px;
+    }
+    
+    .timeline-item.animate {
+      transform: translateX(0) !important;
+    }
+    
+    .timeline-content {
+      width: 100%;
+    }
+    
+    .timeline-content::after {
+      left: -15px !important;
+      right: auto !important;
+      border: 15px solid transparent !important;
+      border-right-color: #fff !important;
+      border-left-color: transparent !important;
+    }
+    
+    .timeline-node {
+      left: 30px;
+    }
+    
+    .timeline-header {
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .timeline-title {
+      margin-left: 0;
+    }
+
+    .back-to-top {
+      bottom: 20px;
+      right: 20px;
+      width: 45px;
+      height: 45px;
+      font-size: 18px;
+    }
 
     .carousel-container {
         max-width: 100%;
@@ -603,12 +937,12 @@ footer a:hover { color: #fff; }
     text-align: center;
   }
 
-  .timeline { padding: 0 20px; }
+  /* .timeline { padding: 0 20px; }
   .timeline-item h3 { font-size: 1rem; }
   .timeline-item p {
     font-size: 0.9rem;
     line-height: 1.5;
-  }
+  } */
 
   .project-card {
     flex: 0 0 70%;   /* ~1.5 cards per swipe */
