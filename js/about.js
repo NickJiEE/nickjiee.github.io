@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const timelineSection = document.querySelector('.timeline-section');
     const timeline = document.querySelector('.timeline');
     const timelineItems = document.querySelectorAll('.timeline-item');
+    let timelineNodes = []; // Store node references
     
     if (!timeline || timelineItems.length === 0) return;
 
@@ -42,24 +43,41 @@ document.addEventListener('DOMContentLoaded', function() {
     endMarker.className = 'timeline-end-marker';
     timeline.appendChild(endMarker);
 
-    // Create timeline nodes dynamically and position them correctly
+    // Function to position timeline nodes based on screen size
+    function positionTimelineNodes() {
+        timelineNodes.forEach((node, index) => {
+            const item = timelineItems[index];
+            node.style.top = (item.offsetTop + 15) + 'px';
+            
+            if (window.innerWidth <= 768) {
+                // Mobile: align left
+                node.style.left = '20px';
+                node.style.transform = 'none';
+            } else {
+                // Desktop: center
+                node.style.left = '50%';
+                node.style.transform = 'translateX(-50%)';
+            }
+        });
+    }
+
+    // Create timeline nodes dynamically
     timelineItems.forEach((item, index) => {
         const node = document.createElement('div');
         node.className = 'timeline-node';
-        
-        // Position the node in the timeline container
         node.style.position = 'absolute';
-        node.style.left = '50%';
-        node.style.transform = 'translateX(-50%)';
-        node.style.top = (item.offsetTop + 15) + 'px'; // 15px to align with content
         
         timeline.appendChild(node);
-        
-        // Add click handler to node
+        timelineNodes.push(node); // Store reference
+
+        // Click handler
         node.addEventListener('click', () => {
             toggleTimelineItem(item);
         });
     });
+
+    // Initial positioning
+    positionTimelineNodes();
 
     // Enhanced Intersection Observer for timeline animation
     const timelineObserver = new IntersectionObserver((entries) => {
@@ -141,19 +159,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Optional: Add mouse hover effects to timeline nodes
-    const allNodes = document.querySelectorAll('.timeline-node');
-    allNodes.forEach(node => {
-        node.addEventListener('mouseenter', () => {
-            node.style.transform = 'translateX(-50%) scale(1.2)';
-            node.style.boxShadow = '0 0 0 12px rgba(0, 191, 255, 0.2)';
-        });
+    // Updated resize handler with node repositioning
+    function handleResize() {
+        // Reposition timeline nodes
+        positionTimelineNodes();
         
-        node.addEventListener('mouseleave', () => {
-            node.style.transform = 'translateX(-50%) scale(1)';
-            node.style.boxShadow = 'none';
+        // Handle hover effects for nodes
+        timelineNodes.forEach(node => {
+            // Remove existing listeners by cloning the node
+            const newNode = node.cloneNode(true);
+            node.parentNode.replaceChild(newNode, node);
+            
+            // Update the reference in our array
+            const nodeIndex = timelineNodes.indexOf(node);
+            timelineNodes[nodeIndex] = newNode;
+            
+            // Re-add click handler
+            newNode.addEventListener('click', () => {
+                toggleTimelineItem(timelineItems[nodeIndex]);
+            });
+            
+            // Add hover effects based on screen size
+            newNode.addEventListener('mouseenter', () => {
+                if (window.innerWidth <= 768) {
+                    newNode.style.transform = 'scale(1.2)';
+                } else {
+                    newNode.style.transform = 'translateX(-50%) scale(1.2)';
+                }
+                newNode.style.boxShadow = '0 0 0 12px rgba(0, 191, 255, 0.2)';
+            });
+            
+            newNode.addEventListener('mouseleave', () => {
+                if (window.innerWidth <= 768) {
+                    newNode.style.transform = 'scale(1)';
+                } else {
+                    newNode.style.transform = 'translateX(-50%) scale(1)';
+                }
+                newNode.style.boxShadow = 'none';
+            });
         });
-    });
+    }
+
+    // Add resize event listener
+    window.addEventListener('resize', handleResize);
 
     // Back to Top Button Functionality
     createBackToTopButton();

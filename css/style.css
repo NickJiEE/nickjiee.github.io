@@ -826,21 +826,34 @@ footer a:hover { color: #fff; }
     .timeline::before {
       left: 30px;
     }
-    
+
+    /* move start + end pulsing dots left */
+    .timeline::after,
+    .timeline-end-marker {
+      left: 30px !important;
+      transform: translateX(0) scale(0); /* reset translateX from desktop */
+    }
+    .timeline.animate::after,
+    .timeline.animate .timeline-end-marker {
+      transform: translateX(0) scale(1); /* pulse from left side */
+    }
+
     .timeline-item {
       justify-content: flex-start !important;
       transform: translateX(50px) !important;
       padding-left: 60px;
     }
-    
+
     .timeline-item.animate {
       transform: translateX(0) !important;
     }
-    
+
     .timeline-content {
-      width: 100%;
+      width: calc(100vw - 80px);
+      max-width: 400px;
+      margin-right: 20px;
     }
-    
+
     .timeline-content::after {
       left: -15px !important;
       right: auto !important;
@@ -848,16 +861,12 @@ footer a:hover { color: #fff; }
       border-right-color: #fff !important;
       border-left-color: transparent !important;
     }
-    
-    .timeline-node {
-      left: 30px;
-    }
-    
+
     .timeline-header {
       flex-direction: column;
       gap: 5px;
     }
-    
+
     .timeline-title {
       margin-left: 0;
     }
