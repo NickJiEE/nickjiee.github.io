@@ -110,37 +110,43 @@
                     </div>
 
                     <div class="project-card">
-                        <img src="assets/images/PowerHub/MPH_3d.png" alt="N/A">
-                        <h3>Modular Power Hub (IP)</h3>
-                        <p class="project-intro">A dual-input, multi-output automatic power selector for microcontrollers and small electronics with selectable voltage rails.</p>
+                        <img src="assets/images/PowerHub/MPH_3d.png" alt="Modular Power Hub 3D PCB Render">
+                        <h3>Modular Power Hub</h3>
+                        <p class="project-intro">An intelligent dual-input power management system with automatic source switching, comprehensive protection, and multi-rail output for embedded systems and IoT projects.</p>
 
                         <!-- hidden modal content -->
                         <div class="project-details" style="display:none;">
                             <h2>Modular Power Hub</h2>
                             <p>
-                                The Modular PowerHub was designed to provide a flexible, reliable power solution for a variety of electronics projects. 
-                                It allows seamless switching between <strong>multiple input sources</strong>, such as USB-C, USB-A or barrel jack adapters, while automatically preventing backfeed or voltage conflicts. 
-                                By supporting multiple output voltage rails, it can power <strong>different devices</strong> with multiple voltage options.
+                                The Modular Power Hub is a professional-grade power management solution designed for modern electronics projects. 
+                                This intelligent system provides <strong>seamless automatic switching</strong> between USB-A and USB-C inputs while delivering clean, regulated power through multiple output rails.
+                                Built with comprehensive protection circuits, it eliminates power source uncertainty and protects valuable components from electrical faults.
                             </p>
 
                             <div class="modal-image-container">
-                                <img src="assets/images/PowerHub/MPH_sch.png" alt="N/A">
+                                <img src="assets/images/PowerHub/MPH_sch.png" alt="Modular Power Hub Schematic">
                                 <span class="zoom-btn">&#128269;</span>
                             </div>
 
                             <p>
-                                The board uses a <strong>TPS2115A dual-input power-path controller</strong> to manage input selection, combined with decoupling capacitors, a polyfuse, and a TVS diode to protect connected devices. 
-                                From the common 5V output, the board provides <strong>multiple regulator paths</strong> including 3.3V and optional adjustable voltage rails. 
-                                Modular headers make it easy to connect microcontrollers, sensors, or other electronics, making the design versatile for prototyping and embedded systems.
+                                The design centers around a <strong>TI TPS2115A intelligent power multiplexer</strong> with priority-based input selection and integrated current limiting. 
+                                The system features <strong>comprehensive protection</strong> including polyfuse overcurrent protection, TVS overvoltage clamping, and thermal safeguards.
+                                An <strong>LD1117V33 LDO regulator</strong> provides clean 3.3V output alongside the primary 5V rail, with excellent regulation performance validated through extensive LTSpice simulation.
                             </p>
 
                             <div class="modal-image-container">
-                                <img src="assets/images/PowerHub/MPH_pcb.png" alt="N/A">
+                                <img src="assets/images/PowerHub/MPH_assembled.jpg" alt="Assembled Modular Power Hub PCB">
                                 <span class="zoom-btn">&#128269;</span>
                             </div>
+                            
+                            <p>
+                                This project showcases end-to-end hardware development from circuit design and simulation through PCB layout, fabrication, and assembly. 
+                                Complete with comprehensive documentation and open-source design files.
+                            </p>
 
                             <p>
-                                For more details, check out the <a href="https://github.com/NickJiEE/Modular-Power-Hub" target="_blank">GitHub repository</a>!
+                                For complete technical documentation, simulation results, and design files, visit the 
+                                <a href="https://github.com/NickJiEE/Modular-Power-Hub" target="_blank">GitHub repository</a>!
                             </p>
                         </div>
                     </div>
