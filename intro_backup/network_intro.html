@@ -172,60 +172,6 @@
       z-index: 1;
     }
 
-    /* Scroll indicator */
-    .scroll-indicator {
-      position: fixed;
-      bottom: 3rem;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0;
-      animation: fadeIn 1s ease 2.5s forwards, bounce 2s ease-in-out 3.5s infinite;
-      pointer-events: none;
-      z-index: 10;
-    }
-
-    .scroll-indicator::before {
-      content: '';
-      display: block;
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, transparent, rgba(0, 191, 255, 0.5));
-      margin: 0 auto 0.5rem;
-    }
-
-    .scroll-text {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.4);
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(10px); }
-    }
-
-    /* Skip button */
-    .skip {
-      position: fixed;
-      top: 2rem;
-      right: 2rem;
-      padding: 0.5rem 1rem;
-      font-size: 0.8rem;
-      background: transparent;
-      color: rgba(255, 255, 255, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      cursor: pointer;
-      pointer-events: auto;
-      transition: all 0.3s ease;
-      z-index: 100;
-    }
-
-    .skip:hover {
-      color: #fff;
-      border-color: rgba(255, 255, 255, 0.5);
-    }
-
     /* Mobile adjustments */
     @media (max-width: 768px) {
       body { cursor: auto; }
@@ -234,7 +180,6 @@
       .subtitle { font-size: 0.8rem; letter-spacing: 0.2em; }
       .role { font-size: 0.75rem; }
       .enter-btn { padding: 0.8rem 2rem; font-size: 0.9rem; }
-      .skip { top: 1rem; right: 1rem; }
     }
 
     /* Fade out transition */
@@ -259,6 +204,7 @@
   <div class="content">
     <div class="name">
       <span>N</span><span>I</span><span>C</span><span>K</span>
+      <span style="display:inline-block;width:0.15em;"></span>
       <span>J</span><span>I</span>
     </div>
     <div class="subtitle">Electrical Engineer</div>
@@ -267,12 +213,6 @@
       <span>Enter Portfolio</span>
     </button>
   </div>
-
-  <div class="scroll-indicator">
-    <div class="scroll-text">Explore</div>
-  </div>
-
-  <button class="skip" onclick="skipAnimation()">Skip</button>
 
   <script>
     // Custom cursor
@@ -470,17 +410,7 @@
       }, 800);
     }
 
-    function skipAnimation() {
-      const elements = document.querySelectorAll('.name span, .subtitle, .role, .enter-btn, .scroll-indicator');
-      elements.forEach(el => {
-        el.style.animation = 'none';
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-      });
-    }
-
     window.enter = enter;
-    window.skipAnimation = skipAnimation;
 
     // Button hover effects
     document.querySelectorAll('button').forEach(btn => {
