@@ -15,6 +15,10 @@
       overflow: hidden;
       height: 100vh;
       cursor: none;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
     }
 
     /* Custom cursor */
@@ -26,7 +30,7 @@
       border-radius: 50%;
       pointer-events: none;
       z-index: 10000;
-      transition: transform 0.15s ease;
+      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
       mix-blend-mode: difference;
     }
 
@@ -137,7 +141,7 @@
       background: transparent;
       color: #fff;
       border: 1px solid rgba(255, 255, 255, 0.3);
-      cursor: pointer;
+      cursor: none;
       pointer-events: auto;
       opacity: 0;
       animation: fadeIn 1s ease 2.2s forwards;
@@ -174,12 +178,19 @@
 
     /* Mobile adjustments */
     @media (max-width: 768px) {
-      body { cursor: auto; }
+      body { 
+        cursor: auto;
+        touch-action: none;
+      }
       .cursor, .cursor-dot { display: none; }
       .name { font-size: clamp(2.5rem, 15vw, 6rem); }
       .subtitle { font-size: 0.8rem; letter-spacing: 0.2em; }
       .role { font-size: 0.75rem; }
-      .enter-btn { padding: 0.8rem 2rem; font-size: 0.9rem; }
+      .enter-btn { 
+        padding: 0.8rem 2rem; 
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
     }
 
     /* Fade out transition */
@@ -228,12 +239,16 @@
     });
 
     function animateCursor() {
-      cursorX += (mouseX - cursorX) * 0.15;
-      cursorY += (mouseY - cursorY) * 0.15;
+      const targetX = mouseX - (cursor.offsetWidth / 2);
+      const targetY = mouseY - (cursor.offsetHeight / 2);
+      
+      cursorX += (targetX - cursorX) * 0.15;
+      cursorY += (targetY - cursorY) * 0.15;
       dotX += (mouseX - dotX) * 0.25;
       dotY += (mouseY - dotY) * 0.25;
       
-      cursor.style.transform = `translate(${cursorX - 10}px, ${cursorY - 10}px)`;
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
       cursorDot.style.transform = `translate(${dotX - 2}px, ${dotY - 2}px)`;
       
       requestAnimationFrame(animateCursor);
@@ -250,6 +265,12 @@
     function resize() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
+      
+      // High DPI support for mobile
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
     }
     resize();
     window.addEventListener('resize', resize);
@@ -413,14 +434,21 @@
     window.enter = enter;
 
     // Button hover effects
-    document.querySelectorAll('button').forEach(btn => {
-      btn.addEventListener('mouseenter', () => {
-        cursor.style.transform = `translate(${mouseX - 10}px, ${mouseY - 10}px) scale(1.5)`;
+    const enterBtn = document.querySelector('.enter-btn');
+    if (enterBtn) {
+      enterBtn.addEventListener('mouseenter', () => {
+        cursor.style.width = '60px';
+        cursor.style.height = '60px';
+        cursor.style.borderColor = 'rgba(0, 191, 255, 0.8)';
+        cursor.style.backgroundColor = 'rgba(0, 191, 255, 0.1)';
       });
-      btn.addEventListener('mouseleave', () => {
-        cursor.style.transform = `translate(${mouseX - 10}px, ${mouseY - 10}px) scale(1)`;
+      enterBtn.addEventListener('mouseleave', () => {
+        cursor.style.width = '20px';
+        cursor.style.height = '20px';
+        cursor.style.borderColor = 'rgba(0, 191, 255, 0.5)';
+        cursor.style.backgroundColor = 'transparent';
       });
-    });
+    }
   </script>
 </body>
 </html>
