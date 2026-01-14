@@ -152,36 +152,55 @@
                     </div>
 
                     <div class="project-card">
-                        <img src="assets/images/3D Optical Lights/optical_lights.webp" alt="3D Optical Lights">
-                        <h3>3D Optical Lights (IP)</h3>
-                        <p class="project-intro">Homemade 3D optical lights with extensive functionalities.</p>
+                        <img src="assets/images/3D Optical Lights/optical_lights.webp" alt="OptiSync 3D Optical Lights">
+                        <h3>OptiSync – 3D Optical Lights</h3>
+                        <p class="project-intro">
+                            A smart 3D optical LED lamp combining etched acrylic, embedded control, and real-time software customization.
+                        </p>
 
                         <!-- hidden modal content -->
                         <div class="project-details" style="display:none;">
-                            <h2>3D Optical Lights</h2>
+                            <h2>OptiSync – 3D Optical Lights</h2>
+
                             <p>
-                                to be added
+                                OptiSync is a <strong>custom-built 3D optical LED lighting system</strong> that transforms etched acrylic panels into vivid, floating light displays using edge-lighting techniques.
+                                By combining precision acrylic etching, addressable RGB LEDs, and an intelligent embedded controller, the system delivers visually striking animations with a clean and minimal hardware design.
                             </p>
 
                             <div class="modal-image-container">
-                                <img src="assets/images/3D Optical Lights/" alt="Sonic Car 1">
+                                <img src="assets/images/3D Optical Lights/optisync_demo.jpg" alt="OptiSync Assembled Lamp">
                                 <span class="zoom-btn">&#128269;</span>
                             </div>
 
                             <p>
-                                to be added
+                                At the core of the system is an <strong>ESP32 microcontroller</strong> that drives a WS2812B addressable LED strip and handles real-time animation rendering.
+                                The acrylic board is edge-lit from below, allowing light to propagate internally and escape only through etched paths, producing a high-contrast 3D visual effect.
+                                A capacitive <strong>TTP223 touch sensor</strong> provides intuitive on/off control directly on the lamp.
                             </p>
 
                             <div class="modal-image-container">
-                                <img src="assets/images/3D Optical Lights/" alt="Sonic Car 2">
+                                <img src="assets/images/3D Optical Lights/control_app.png" alt="OptiSync Lighting Patterns">
                                 <span class="zoom-btn">&#128269;</span>
                             </div>
 
                             <p>
-                                For more details, check out the <a href="" target="_blank">GitHub repository</a>!
+                                OptiSync features a <strong>desktop control application</strong> that enables live adjustment of brightness, animation speed, RGB color values, and lighting patterns.
+                                Users can save custom presets directly to the ESP32’s non-volatile memory, allowing configurations to persist across power cycles.
+                                Firmware updates are streamlined through an integrated one-click flashing system, eliminating the need for external tools.
+                            </p>
+
+                            <p>
+                                The project demonstrates <strong>end-to-end system design</strong>, spanning embedded firmware development, desktop software engineering, hardware integration,
+                                and mechanical enclosure design through 3D printing. Future expansions include OTA firmware updates, web-based control, and additional animation modes.
+                            </p>
+
+                            <p>
+                                For full documentation, firmware source code, desktop software, and design files, visit the
+                                <a href="https://github.com/NickJiEE/OptiSync" target="_blank">GitHub repository</a>.
                             </p>
                         </div>
                     </div>
+
 
                     <div class="project-card">
                         <img src="assets/images/Sonic Car/sonic_car.png" alt="SonicCar">
