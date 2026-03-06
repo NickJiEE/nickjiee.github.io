@@ -108,7 +108,7 @@ body::before {
 .navbar .logo img {
   height: 60px;
   width: auto;
-  filter: brightness(0) invert(1);
+  /* filter: brightness(0) invert(1); */ /* If using a black logo, this will invert it to white */
   opacity: 0.9;
   transition: opacity var(--transition);
 }
