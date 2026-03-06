@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
+        threshold: 0,
+        rootMargin: '0px 0px 0px 0px'
     });
 
     function animateTimeline() {
@@ -97,6 +97,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (timelineSection) {
         timelineObserver.observe(timelineSection);
+        // Fallback: if section is already in viewport on load, trigger immediately
+        const rect = timelineSection.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+            setTimeout(animateTimeline, 100);
+        }
     }
 
     timelineItems.forEach(item => {
@@ -172,6 +177,8 @@ function createBackToTopButton() {
     backToTopBtn.title = 'Back to Top';
     
     document.body.appendChild(backToTopBtn);
+
+    document.querySelector('.wrapper').appendChild(backToTopBtn);
     
     function toggleBackToTopButton() {
         if (window.scrollY > 300) {
