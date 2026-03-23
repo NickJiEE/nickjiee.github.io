@@ -42,6 +42,46 @@
 
                     <!-- Projects -->
                     <div class="project-card">
+                        <img src="assets/images/Dual Core Accelerator/dual_core_cover.png" alt="Dual-Core ML Accelerator">
+                        <h3>Dual-Core ML Accelerator</h3>
+                        <p class="project-intro">A dual-core hardware accelerator for the attention mechanism in transformer models, synthesized and place-and-routed in TSMC 65nm targeting 1 GHz.</p>
+ 
+                        <div class="project-details" style="display:none;">
+                            <h2>Dual-Core ML Accelerator</h2>
+                            <p>
+                                This project implements a <strong>dual-core hardware accelerator for scaled dot-product attention</strong> (Q×K)
+                                used in transformer-based ML models. Each core features an 8×8 2D systolic array of MAC units operating on
+                                8-bit integer vectors, synthesized in <strong>TSMC 65nm</strong> and fully place-and-routed targeting
+                                <strong>1 GHz</strong> using Synopsys Design Compiler and Cadence Innovus.
+                            </p>
+                            <div class="modal-image-container">
+                                <img src="assets/images/Dual Core Accelerator/dual_core_cover.png" alt="Dual-core PnR layout">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+                            <p>
+                                Beginning from a single-core RTL design, the work progressively builds toward
+                                <strong>dual-core parallelism across independent clock domains</strong>, fixed-point output normalization,
+                                hierarchical synthesis with SRAM hard blocks, and sparsity-aware optimizations — all validated through
+                                gate-level simulation with SDF back-annotation. A 4-phase req/ack asynchronous CDC bridge handles
+                                partial sum exchange between the two clock domains without synchronizing the full data bus.
+                            </p>
+                            <div class="modal-image-container">
+                                <img src="assets/images/Dual Core Accelerator/dual_core_waveform.png" alt="Gate-level simulation waveform">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+                            <p>
+                                Key optimizations — including pipelining the normalization critical path and hardening the async
+                                handshake — improved WNS by over <strong>6 ns</strong> while cutting total power by <strong>~50%</strong>
+                                and area by <strong>~67%</strong> versus the unoptimized baseline. Row-level sparsity was also implemented,
+                                skipping normalization for low-energy rows and reducing single-core power from 83.2 mW to 64.9 mW.
+                            </p>
+                            <p>
+                                For more details, check out the <a href="https://github.com/NickJiEE/Dual-Core-ML-Accelerator" target="_blank">GitHub repository</a>!
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
                         <img src="assets/images/KSA/KSA.png" alt="8-bit KSA">
                         <h3>8-bit Kogge-Stone Adder</h3>
                         <p class="project-intro">A high-speed 8-bit Kogge-Stone Adder (KSA) using static CMOS logic, designed and simulated in Cadence.</p>
