@@ -42,6 +42,122 @@
 
                     <!-- Projects -->
                     <div class="project-card">
+                        <img src="assets/images/SAR ADC/SAR_ADC_black.png" alt="9-bit SAR ADC">
+                        <h3>9-bit Differential SAR ADC</h3>
+                        <p class="project-intro">A fully custom-layout 9-bit differential SAR ADC in TSMC 65nm with bootstrapped sampling switches, achieving 50.8 dB SNDR and 60 dB SFDR, taped out as part of a 6-group top chip.</p>
+
+                        <div class="project-details" style="display:none;">
+                            <h2>9-bit Differential SAR ADC</h2>
+                            <p>
+                                This project involved the full custom design, layout, and post-layout verification of a
+                                <strong>9-bit differential SAR ADC in TSMC 65nm</strong> using Cadence Virtuoso.
+                                Every analog core block was hand-laid from scratch: the comparator, bootstrapped
+                                sampling switches, inverters, skewed buffers, and RS latch, with careful attention to
+                                matching, noise isolation, and parasitic symmetry.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/SAR ADC/SAR_ADC_black_annotated.png" alt="SAR ADC Top-Level Layout">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <h3 style="margin-top: 1.5rem;">Comparator &amp; CDAC Layout</h3>
+                            <p>
+                                The dynamic two-stage comparator (Van Elzakker, JSSC 2010) was laid out using a <strong>common-centroid differential pair</strong>,
+                                with dummy devices back-annotated throughout to ensure every active device sees the same
+                                local environment. Guard rings isolate the sensitive analog nodes from digital switching noise.
+                                Monte Carlo mismatch simulation in <strong>ADE XL</strong> across different process corners confirmed
+                                a mean offset of <strong>&lt;3.2 mV (FF) and &lt;1.8 mV (SS)</strong>, well within the
+                                ±0.5 LSB target.
+                            </p>
+                            <p>
+                                The binary-weighted CDAC was generated with the help of SKILL scripts (LLM-assisted) for
+                                layout efficiency, surrounded by a full dummy capacitor ring. Iterative simulation-driven
+                                refinement brought all capacitor ratios to within <strong>&lt;±0.2%</strong> of their ideal
+                                binary-weighted values, critical for achieving monotonic code transitions.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/SAR ADC/comparator_black.png" alt="Comparator Layout">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <h3 style="margin-top: 1.5rem;">Bootstrapped Sampling Switches</h3>
+                            <p>
+                                Referencing <strong>Prof. Razavi's bootstrapped switch topology</strong> (UCLA), a custom
+                                bootstrapping network was designed to hold the gate-source voltage V<sub>GS</sub> of the
+                                top-plate sampling switches nearly constant across the full input swing, achieving a
+                                V<sub>GS</sub> variation of only <strong>~25 mV</strong>. This dramatically linearizes the
+                                on-resistance R<sub>ON</sub>, with the sampling switch network alone improving
+                                <strong>SFDR from 43 dB to 59 dB</strong>.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/SAR ADC/bootstrap_schematic_black.png" alt="Bootstrapped Switch Schematic">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <h3 style="margin-top: 1.5rem;">Digital Controller &amp; Layout Methodology</h3>
+                            <p>
+                                The digital SAR controller was designed in <strong>VerilogA</strong> and taken through
+                                synthesis and place-and-route, with IO pin locations customized to minimize routing distance
+                                to the analog blocks while keeping the overall controller footprint compact.
+                                Across all layouts, odd metal layers were routed vertically and even layers horizontally,
+                                digital signal traces were physically separated from analog to suppress crosstalk,
+                                and wire lengths were matched wherever parasitic symmetry mattered, both for RC delay
+                                in digital paths and mismatch control in analog ones.
+                            </p>
+
+                            <h3 style="margin-top: 1.5rem;">Post-Layout Verification</h3>
+                            <p>
+                                After full <strong>R+C+C<sub>c</sub> parasitic extraction</strong>, the ADC was simulated
+                                in ADE L for SNDR and SFDR. With metal fillers and DCAP cells in place, the final verified
+                                performance is:
+                            </p>
+                            <ul style="margin: 0.5rem 0 1rem 1.2rem; line-height: 2;">
+                                <li><strong>SNDR:</strong> 50.8 dB</li>
+                                <li><strong>SFDR:</strong> 60 dB</li>
+                                <li><strong>Power:</strong> 241 μW</li>
+                                <li><strong>Die Area:</strong> 399.2 × 341.5 μm</li>
+                            </ul>
+                            <p>
+                                ADE L was also used to validate comparator propagation delay across corners, and
+                                ADE XL Monte Carlo runs covered both device mismatch and full PVT corner sweeps.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/SAR ADC/sfdr_plot.png" alt="SNDR/SFDR Simulation Results">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <h3 style="margin-top: 1.5rem;">Top Chip Tape-Out</h3>
+                            <p>
+                                The design was subsequently merged with five other groups' SAR ADCs into a
+                                <strong>6-ADC top-level tape-out chip</strong>. To support testability, a
+                                <strong>6-to-1 output MUX</strong> (VerilogA) was designed to select the 10-bit output
+                                from any of the six ADCs, along with a <strong>10-bit buffer array</strong> to restore
+                                signal strength along the long on-chip traces from ADC outputs to pads.
+                            </p>
+                            <p>
+                                At the top level, the pad ring was modified to give each SAR ADC its own V<sub>DD</sub>
+                                domain while sharing a common VSS, and ESD protection was added to all exposed pads.
+                                Full <strong>DRC and LVS closure</strong> was achieved on the complete top chip —
+                                including density checks, antenna rule checks, and seal ring insertion to prevent
+                                fabrication edge defects.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/SAR ADC/adc_chip_black.png" alt="Top-Level Chip Layout">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                For more details, check out the <a href="https://github.com/NickJiEE/9-bit-SAR-ADC" target="_blank">GitHub repository</a>!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
                         <img src="assets/images/Dual Core Accelerator/dual_core_cover.png" alt="Dual-Core ML Accelerator">
                         <h3>Dual-Core ML Accelerator</h3>
                         <p class="project-intro">A dual-core hardware accelerator for the attention mechanism in transformer models, synthesized and place-and-routed in TSMC 65nm targeting 1 GHz.</p>

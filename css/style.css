@@ -926,11 +926,11 @@ body::before {
 }
 .carousel-container::before {
   left: 0;
-  background: linear-gradient(to right, var(--bg-primary), transparent);
+  background: linear-gradient(to right, rgba(8,12,16,0.7) 0%, transparent 100%);
 }
 .carousel-container::after {
   right: 0;
-  background: linear-gradient(to left, var(--bg-primary), transparent);
+  background: linear-gradient(to left, rgba(8,12,16,0.7) 0%, transparent 100%);
 }
 
 .carousel-track {
