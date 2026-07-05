@@ -41,6 +41,7 @@
                 <div class="carousel-track">
 
                     <!-- Projects -->
+                    <!-- SAR ADC -->
                     <div class="project-card">
                         <img src="assets/images/SAR ADC/SAR_ADC_black.png" alt="9-bit SAR ADC">
                         <h3>9-bit Differential SAR ADC</h3>
@@ -157,6 +158,80 @@
                         </div>
                     </div>
 
+                    <!-- CrCM Boost PFC -->
+                    <div class="project-card">
+                        <img src="assets/images/CrCM PFC/pfc.png"
+                            alt="CrCM Boost PFC Simulink Model">
+
+                        <h3>CrCM Boost PFC</h3>
+
+                        <p class="project-intro">
+                            A 100 W universal-input CrCM boost PFC converter designed and verified
+                            in Simulink/Simscape, with generated C and STM32G4 target support.
+                        </p>
+
+                        <div class="project-details" style="display:none;">
+                            <h2>Critical-Conduction-Mode Boost PFC</h2>
+
+                            <p>
+                                This project implements a
+                                <strong>100 W critical-conduction-mode boost PFC converter</strong>
+                                for <strong>90–264 VAC, 50/60 Hz</strong> input and a regulated
+                                <strong>400 VDC</strong> output bus. The controller shapes the input
+                                current by restarting each switching cycle after the inductor current
+                                returns to zero.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/CrCM PFC/pfc.png"
+                                    alt="Complete CrCM Boost PFC Simulink Model">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <h3 style="margin-top: 1.5rem;">Control and Verification</h3>
+
+                            <p>
+                                The discrete controller includes
+                                <strong>zero-current detection</strong>, variable-frequency switching,
+                                input-voltage feedforward, output-voltage regulation, startup sequencing,
+                                and overcurrent/overvoltage protection. The converter was verified under
+                                startup, steady-state, no-load, reduced-load, and load-step conditions.
+                            </p>
+
+                            <ul style="margin: 0.5rem 0 1rem 1.2rem; line-height: 2;">
+                                <li><strong>Input:</strong> 90–264 VAC, 50/60 Hz</li>
+                                <li><strong>Output:</strong> 400 VDC, 100 W</li>
+                                <li><strong>Rated-load PF:</strong> 0.991–0.999</li>
+                                <li><strong>Maximum modeled efficiency:</strong> 98.2%</li>
+                                <li><strong>Maximum switching frequency:</strong> approximately 476 kHz</li>
+                            </ul>
+
+                            <h3 style="margin-top: 1.5rem;">Embedded Implementation</h3>
+
+                            <p>
+                                The controller was separated into a code-generation-compatible model,
+                                converted to C using <strong>Embedded Coder</strong>, and verified through
+                                <strong>software-in-the-loop testing</strong>. It was also successfully
+                                cross-compiled for an <strong>STM32G4 / NUCLEO-G474RE</strong> target
+                                using STM32CubeMX and the GNU Arm toolchain.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/CrCM PFC/pfc_controller_stm32.png"
+                                    alt="CrCM PFC STM32 Model">
+                                <span class="zoom-btn">&#128269;</span>
+                            </div>
+
+                            <p>
+                                For complete design details and simulation results, check out the
+                                <a href="https://github.com/NickJiEE/CrCM-Boost-PFC" target="_blank">
+                                    GitHub repository
+                                </a>!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Dual Core ML Accelerator -->
                     <div class="project-card">
                         <img src="assets/images/Dual Core Accelerator/dual_core_cover.png" alt="Dual-Core ML Accelerator">
                         <h3>Dual-Core ML Accelerator</h3>
@@ -197,6 +272,7 @@
                         </div>
                     </div>
                     
+                    <!-- 8-Bit KSA -->
                     <div class="project-card">
                         <img src="assets/images/KSA/KSA.png" alt="8-bit KSA">
                         <h3>8-bit Kogge-Stone Adder</h3>
@@ -226,6 +302,7 @@
                         </div>
                     </div>
 
+                    <!-- Cosmic Whisper -->
                     <div class="project-card">
                         <img src="assets/images/Cosmic Whisper/cosmic_whisper.png" alt="Cosmic Whisper">
                         <h3>Cosmic Whisper</h3>
@@ -257,6 +334,7 @@
                         </div>
                     </div>
 
+                    <!-- Modular Power Hub -->
                     <div class="project-card">
                         <img src="assets/images/PowerHub/MPH_3d.png" alt="Modular Power Hub 3D PCB Render">
                         <h3>Modular Power Hub</h3>
