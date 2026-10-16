@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CrCM Boost PFC | Nick Ji</title>
+<meta name="description" content="A 100 W universal-input CrCM boost PFC converter designed and verified
+                            in Simulink/Simscape, with generated C and STM32G4 target support.">
+<link rel="icon" href="assets/images/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/site.js" defer>
+</script>
+<noscript><style>.menu-toggle{display:none!important}.nav{height:auto;min-height:90px;flex-wrap:wrap;gap:15px;padding-block:15px}.nav-links{display:flex;position:static;flex-direction:row;flex-wrap:wrap;padding:0;border:0}</style></noscript>
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav class="nav shell" aria-label="Main navigation"><a class="brand" href="main.html" aria-label="Nick Ji home">N<span class="brand-dot">.</span>J<span class="brand-name">NICK JI</span></a><button class="menu-toggle" aria-expanded="false" aria-controls="nav-links">Menu <span>+</span></button>
+<div class="nav-links" id="nav-links"><a href="main.html">Home</a><a href="projects.html" aria-current="page">Work</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+</div>
+</nav>
+<div class="project-return"><div class="shell"><a class="back-link" href="projects.html">← All work</a></div></div>
+</header>
+<main id="main">
+<section class="project-hero shell">
+<p class="eyebrow">Power & embedded / PROJECT NOTES</p>
+<h1>CrCM Boost PFC</h1>
+<p>A 100 W universal-input CrCM boost PFC converter designed and verified
+                            in Simulink/Simscape, with generated C and STM32G4 target support.</p>
+</section>
+<article class="project-body shell">
+                            
+
+                            <p>
+                                This project implements a
+                                <strong>100 W critical-conduction-mode boost PFC converter</strong>
+                                for <strong>90–264 VAC, 50/60 Hz</strong> input and a regulated
+                                <strong>400 VDC</strong> output bus. The controller shapes the input
+                                current by restarting each switching cycle after the inductor current
+                                returns to zero.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/CrCM PFC/pfc.png" alt="Complete CrCM Boost PFC Simulink Model" loading="lazy">
+                                
+                            </div>
+
+                            <h3 style="margin-top: 1.5rem;">Control and Verification</h3>
+
+                            <p>
+                                The discrete controller includes
+                                <strong>zero-current detection</strong>, variable-frequency switching,
+                                input-voltage feedforward, output-voltage regulation, startup sequencing,
+                                and overcurrent/overvoltage protection. The converter was verified under
+                                startup, steady-state, no-load, reduced-load, and load-step conditions.
+                            </p>
+
+                            <ul style="margin: 0.5rem 0 1rem 1.2rem; line-height: 2;">
+                                <li><strong>Input:</strong> 90–264 VAC, 50/60 Hz</li>
+                                <li><strong>Output:</strong> 400 VDC, 100 W</li>
+                                <li><strong>Rated-load PF:</strong> 0.991–0.999</li>
+                                <li><strong>Maximum modeled efficiency:</strong> 98.2%</li>
+                                <li><strong>Maximum switching frequency:</strong> approximately 476 kHz</li>
+                            </ul>
+
+                            <h3 style="margin-top: 1.5rem;">Embedded Implementation</h3>
+
+                            <p>
+                                The controller was separated into a code-generation-compatible model,
+                                converted to C using <strong>Embedded Coder</strong>, and verified through
+                                <strong>software-in-the-loop testing</strong>. It was also successfully
+                                cross-compiled for an <strong>STM32G4 / NUCLEO-G474RE</strong> target
+                                using STM32CubeMX and the GNU Arm toolchain.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/CrCM PFC/pfc_controller_stm32.png" alt="CrCM PFC STM32 Model" loading="lazy">
+                                
+                            </div>
+
+                            <p>
+                                For complete design details and simulation results, check out the
+                                <a href="https://github.com/NickJiEE/CrCM-Boost-PFC" target="_blank" rel="noopener noreferrer">
+                                    GitHub repository
+                                </a>!
+                            </p>
+                        </article>
+<section class="next-project shell">
+<p class="eyebrow">NEXT PROJECT</p><a href="project-cosmic-whisper.html">Cosmic Whisper ↗</a>
+</section>
+<dialog class="image-dialog"><button class="dialog-close" aria-label="Close enlarged image">Close ×</button><img alt="">
+</dialog>
+</main>
+<footer class="footer shell"><a class="footer-name" href="main.html">Nick Ji<span>Digital thinking. Physical implementation.</span></a>
+<div><a href="https://github.com/nickjiee" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/nick-ji/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="index.html">Replay intro ↗</a>
+</div>
+<p>© <span data-year>2026</span> Nick Ji · San Diego, CA</p>
+</footer>
+</body>
+</html>

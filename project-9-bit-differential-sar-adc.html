@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9-bit Differential SAR ADC | Nick Ji</title>
+<meta name="description" content="A fully custom-layout 9-bit differential SAR ADC in TSMC 65nm with bootstrapped sampling switches, achieving 50.5 dB SNDR and 59.5 dB SFDR, taped out as part of a 6-group top chip.">
+<link rel="icon" href="assets/images/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/site.js" defer>
+</script>
+<noscript><style>.menu-toggle{display:none!important}.nav{height:auto;min-height:90px;flex-wrap:wrap;gap:15px;padding-block:15px}.nav-links{display:flex;position:static;flex-direction:row;flex-wrap:wrap;padding:0;border:0}</style></noscript>
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav class="nav shell" aria-label="Main navigation"><a class="brand" href="main.html" aria-label="Nick Ji home">N<span class="brand-dot">.</span>J<span class="brand-name">NICK JI</span></a><button class="menu-toggle" aria-expanded="false" aria-controls="nav-links">Menu <span>+</span></button>
+<div class="nav-links" id="nav-links"><a href="main.html">Home</a><a href="projects.html" aria-current="page">Work</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+</div>
+</nav>
+<div class="project-return"><div class="shell"><a class="back-link" href="projects.html">← All work</a></div></div>
+</header>
+<main id="main">
+<section class="project-hero shell">
+<p class="eyebrow">Mixed-signal IC / PROJECT NOTES</p>
+<h1>9-bit Differential SAR ADC</h1>
+<p>A fully custom-layout 9-bit differential SAR ADC in TSMC 65nm with bootstrapped sampling switches, achieving 50.5 dB SNDR and 59.5 dB SFDR, taped out as part of a 6-group top chip.</p>
+</section>
+<article class="project-body shell">
+                            
+                            <p>
+                                This project involved the full custom design, layout, and post-layout verification of a
+                                <strong>9-bit differential SAR ADC in TSMC 65nm</strong> using Cadence Virtuoso.
+                                Every analog core block was hand-laid from scratch: the comparator, bootstrapped
+                                sampling switches, inverters, skewed buffers, and RS latch, with careful attention to
+                                matching, noise isolation, and parasitic symmetry.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/SAR ADC/SAR_ADC_black_annotated.png" alt="SAR ADC Top-Level Layout" loading="lazy">
+                                
+                            </div>
+
+                            <h3 style="margin-top: 1.5rem;">Comparator &amp; CDAC Layout</h3>
+                            <p>
+                                The dynamic two-stage comparator (Van Elzakker, JSSC 2010) was laid out using a <strong>common-centroid differential pair</strong>,
+                                with dummy devices back-annotated throughout to ensure every active device sees the same
+                                local environment. Guard rings isolate the sensitive analog nodes from digital switching noise.
+                                Monte Carlo mismatch simulation in <strong>ADE XL</strong> across different process corners confirmed
+                                a mean offset of <strong>&lt;3.2 mV (FF) and &lt;1.8 mV (SS)</strong>, well within the
+                                ±0.5 LSB target.
+                            </p>
+                            <p>
+                                The binary-weighted CDAC was generated with the help of SKILL scripts (LLM-assisted) for
+                                layout efficiency, surrounded by a full dummy capacitor ring. Iterative simulation-driven
+                                refinement brought all capacitor ratios to within <strong>&lt;±0.2%</strong> of their ideal
+                                binary-weighted values, critical for achieving monotonic code transitions.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/SAR ADC/comparator_black.png" alt="Comparator Layout" loading="lazy">
+                                
+                            </div>
+
+                            <h3 style="margin-top: 1.5rem;">Bootstrapped Sampling Switches</h3>
+                            <p>
+                                Referencing <strong>Prof. Razavi's bootstrapped switch topology</strong> (UCLA), a custom
+                                bootstrapping network was designed to hold the gate-source voltage V<sub>GS</sub> of the
+                                top-plate sampling switches nearly constant across the full input swing, achieving a
+                                V<sub>GS</sub> variation of only <strong>~25 mV</strong>. This dramatically linearizes the
+                                on-resistance R<sub>ON</sub>, with the sampling switch network alone improving
+                                <strong>SFDR from 43 dB to 59 dB</strong>.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/SAR ADC/bootstrap_schematic_black.png" alt="Bootstrapped Switch Schematic" loading="lazy">
+                                
+                            </div>
+
+                            <h3 style="margin-top: 1.5rem;">Digital Controller &amp; Layout Methodology</h3>
+                            <p>
+                                The digital SAR controller was designed in <strong>VerilogA</strong> and taken through
+                                synthesis and place-and-route, with IO pin locations customized to minimize routing distance
+                                to the analog blocks while keeping the overall controller footprint compact.
+                                Across all layouts, odd metal layers were routed vertically and even layers horizontally,
+                                digital signal traces were physically separated from analog to suppress crosstalk,
+                                and wire lengths were matched wherever parasitic symmetry mattered, both for RC delay
+                                in digital paths and mismatch control in analog ones.
+                            </p>
+
+                            <h3 style="margin-top: 1.5rem;">Post-Layout Verification</h3>
+                            <p>
+                                After full <strong>R+C+C<sub>c</sub> parasitic extraction</strong>, the ADC was simulated
+                                in ADE L for SNDR and SFDR. With metal fillers and DCAP cells in place, the final verified
+                                performance is:
+                            </p>
+                            <ul style="margin: 0.5rem 0 1rem 1.2rem; line-height: 2;">
+                                <li><strong>SNDR:</strong> 50.5 dB</li>
+                                <li><strong>SFDR:</strong> 59.5 dB</li>
+                                <li><strong>Power:</strong> 233.3 μW</li>
+                                <li><strong>Die Area:</strong> 399.2 × 341.5 μm</li>
+                            </ul>
+                            <p>
+                                ADE L was also used to validate comparator propagation delay across corners, and
+                                ADE XL Monte Carlo runs covered both device mismatch and full PVT corner sweeps.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/SAR ADC/sfdr_plot.png" alt="SNDR/SFDR Simulation Results" loading="lazy">
+                                
+                            </div>
+
+                            <h3 style="margin-top: 1.5rem;">Top Chip Tape-Out</h3>
+                            <p>
+                                The design was subsequently merged with five other groups' SAR ADCs into a
+                                <strong>6-ADC top-level tape-out chip</strong>. To support testability, a
+                                <strong>6-to-1 output MUX</strong> (VerilogA) was designed to select the 10-bit output
+                                from any of the six ADCs, along with a <strong>10-bit buffer array</strong> to restore
+                                signal strength along the long on-chip traces from ADC outputs to pads.
+                            </p>
+                            <p>
+                                At the top level, the pad ring was modified to give each SAR ADC its own V<sub>DD</sub>
+                                domain while sharing a common VSS, and ESD protection was added to all exposed pads.
+                                Full <strong>DRC and LVS closure</strong> was achieved on the complete top chip —
+                                including density checks, antenna rule checks, and seal ring insertion to prevent
+                                fabrication edge defects.
+                            </p>
+
+                            <div class="modal-image-container">
+                                <img src="assets/images/SAR ADC/adc_chip_black.png" alt="Top-Level Chip Layout" loading="lazy">
+                                
+                            </div>
+
+                            <p>
+                                For more details, check out the <a href="https://github.com/NickJiEE/9-bit-SAR-ADC" target="_blank" rel="noopener noreferrer">GitHub repository</a>!
+                            </p>
+                        </article>
+<section class="next-project shell">
+<p class="eyebrow">NEXT PROJECT</p><a href="project-8-bit-kogge-stone-adder.html">8-bit Kogge-Stone Adder ↗</a>
+</section>
+<dialog class="image-dialog"><button class="dialog-close" aria-label="Close enlarged image">Close ×</button><img alt="">
+</dialog>
+</main>
+<footer class="footer shell"><a class="footer-name" href="main.html">Nick Ji<span>Digital thinking. Physical implementation.</span></a>
+<div><a href="https://github.com/nickjiee" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/nick-ji/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="index.html">Replay intro ↗</a>
+</div>
+<p>© <span data-year>2026</span> Nick Ji · San Diego, CA</p>
+</footer>
+</body>
+</html>

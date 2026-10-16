@@ -1,0 +1,80 @@
+.intro-page {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow-x: hidden;
+  isolation: isolate;
+  background: #0c0f0f;
+}
+#network { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -2; }
+.intro-top, .intro-bottom {
+  position: absolute; left: 5%; right: 5%; display: flex; justify-content: space-between;
+  gap: 20px; font: 10px/1.8 var(--mono); letter-spacing: .1em; color: var(--muted); z-index: 3;
+}
+.intro-top { top: 35px; }
+.intro-bottom { bottom: 30px; }
+.intro-top a { color: var(--ink); transition: color .2s; }
+.intro-top a:hover { color: var(--accent); }
+.intro-content {
+  text-align: center;
+  padding: 130px 20px;
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.intro-content::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(ellipse, #0c0f0feb 5%, #0c0f0f95 45%, transparent 70%);
+  pointer-events: none;
+}
+.intro-content .eyebrow { font-size: 10px; animation: intro-arrive 1s .1s both; }
+.intro-content h1 {
+  font-size: clamp(85px,17vw,240px); letter-spacing: -.075em; font-weight: 500;
+  line-height: 1.08; margin: 0 0 28px;
+}
+.name-word { display: inline-block; animation: name-reveal 1.4s cubic-bezier(.16,1,.3,1) both; }
+.name-word:nth-child(2) { animation-delay: .15s; }
+.name-dot { color: var(--accent); text-shadow: 0 0 45px #b5efce40; }
+.intro-subtitle { font: 11px/2 var(--mono); letter-spacing: .15em; margin-bottom: 40px; animation: intro-arrive 1s .4s both; }
+.intro-content .button { position: relative; animation: intro-arrive 1s .65s both; min-width: 210px; overflow: hidden; }
+.intro-content .button::before {
+  content: ''; position: absolute; inset: 0; transform: translateX(-130%) skewX(-20deg);
+  background: linear-gradient(90deg,transparent,#ffffff65,transparent); pointer-events: none;
+}
+.intro-content .button:hover::before { animation: button-sheen .65s ease; }
+.intro-content .button span { transition: transform .25s; }
+.intro-content .button:hover span { transform: translate(3px,-3px); }
+.intro-caption { margin: 24px 0 0; font: 9px var(--mono); color: var(--muted); letter-spacing: .1em; animation: intro-arrive 1s .9s both; }
+.intro-bottom button { background: none; border: 0; color: var(--muted); font: inherit; padding: 0; text-decoration: underline; text-underline-offset: 5px; }
+.intro-bottom button:hover { color: var(--accent); }
+.ambient-orbit {
+  position: fixed; top: 50%; left: 50%; width: min(76vw,1080px); aspect-ratio: 1;
+  border: 1px solid #b5efce0e; border-radius: 50%; z-index: -2; pointer-events: none;
+  transform: translate(-50%,-50%) rotate(-30deg) scaleY(.64);
+}
+.ambient-orbit::after { content: ''; position: absolute; top: 50%; left: -3px; width: 5px; height: 5px; border-radius: 50%; background: #b5efce88; box-shadow: 0 0 18px #b5efce66; }
+.orbit-one { animation: orbit-turn 60s linear infinite; }
+.orbit-two { width: min(95vw,1350px); animation: orbit-turn 80s linear infinite reverse; opacity: .6; }
+.motion-paused *, .motion-paused *::before, .motion-paused *::after { animation-play-state: paused !important; }
+/* Entrance text is always readable, including when motion is paused on load. */
+.motion-paused .name-word, .motion-paused .intro-content .eyebrow, .motion-paused .intro-subtitle,
+.motion-paused .intro-content .button, .motion-paused .intro-caption { animation: none; }
+.leaving .intro-content { opacity: 0; filter: blur(5px); transform: scale(1.025); transition: opacity .4s, transform .4s, filter .4s; }
+.leaving #network { opacity: .25; transition: opacity .4s; }
+@keyframes intro-arrive { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes name-reveal { from { opacity: 0; transform: translateY(35px); filter: blur(10px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+@keyframes orbit-turn { from { transform: translate(-50%,-50%) rotate(-30deg) scaleY(.64); } to { transform: translate(-50%,-50%) rotate(330deg) scaleY(.64); } }
+@keyframes button-sheen { to { transform: translateX(130%) skewX(-20deg); } }
+@media(max-width:600px) {
+  .intro-top,.intro-bottom { font-size: 8px; }
+  .intro-top>span { display: none; }
+  .intro-content h1 { font-size: 25vw; }
+  .intro-subtitle { font-size: 9px; letter-spacing: .08em; }
+  .intro-bottom { bottom: 20px; }
+  .intro-caption { max-width: 230px; margin-inline: auto; line-height: 1.8; font-size: 8px; }
+  .ambient-orbit { width: 130vw; }
+  .orbit-two { width: 175vw; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .intro-content *, .ambient-orbit { animation: none !important; }
+}

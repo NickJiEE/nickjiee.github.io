@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dual-Core ML Accelerator | Nick Ji</title>
+<meta name="description" content="A dual-core hardware accelerator for the attention mechanism in transformer models, synthesized and place-and-routed in TSMC 65nm targeting 1 GHz.">
+<link rel="icon" href="assets/images/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/site.js" defer>
+</script>
+<noscript><style>.menu-toggle{display:none!important}.nav{height:auto;min-height:90px;flex-wrap:wrap;gap:15px;padding-block:15px}.nav-links{display:flex;position:static;flex-direction:row;flex-wrap:wrap;padding:0;border:0}</style></noscript>
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav class="nav shell" aria-label="Main navigation"><a class="brand" href="main.html" aria-label="Nick Ji home">N<span class="brand-dot">.</span>J<span class="brand-name">NICK JI</span></a><button class="menu-toggle" aria-expanded="false" aria-controls="nav-links">Menu <span>+</span></button>
+<div class="nav-links" id="nav-links"><a href="main.html">Home</a><a href="projects.html" aria-current="page">Work</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+</div>
+</nav>
+<div class="project-return"><div class="shell"><a class="back-link" href="projects.html">← All work</a></div></div>
+</header>
+<main id="main">
+<section class="project-hero shell">
+<p class="eyebrow">Digital IC / PROJECT NOTES</p>
+<h1>Dual-Core ML Accelerator</h1>
+<p>A dual-core hardware accelerator for the attention mechanism in transformer models, synthesized and place-and-routed in TSMC 65nm targeting 1 GHz.</p>
+</section>
+<article class="project-body shell">
+                            
+                            <p>
+                                This project implements a <strong>dual-core hardware accelerator for scaled dot-product attention</strong> (Q×K)
+                                used in transformer-based ML models. Each core features an 8×8 2D systolic array of MAC units operating on
+                                8-bit integer vectors, synthesized in <strong>TSMC 65nm</strong> and fully place-and-routed targeting
+                                <strong>1 GHz</strong> using Synopsys Design Compiler and Cadence Innovus.
+                            </p>
+                            <div class="modal-image-container">
+                                <img src="assets/images/Dual Core Accelerator/dual_core_cover.png" alt="Dual-core PnR layout" loading="lazy">
+                                
+                            </div>
+                            <p>
+                                Beginning from a single-core RTL design, the work progressively builds toward
+                                <strong>dual-core parallelism across independent clock domains</strong>, fixed-point output normalization,
+                                hierarchical synthesis with SRAM hard blocks, and sparsity-aware optimizations — all validated through
+                                gate-level simulation with SDF back-annotation. A 4-phase req/ack asynchronous CDC bridge handles
+                                partial sum exchange between the two clock domains without synchronizing the full data bus.
+                            </p>
+                            <div class="modal-image-container">
+                                <img src="assets/images/Dual Core Accelerator/dual_core_waveform.png" alt="Gate-level simulation waveform" loading="lazy">
+                                
+                            </div>
+                            <p>
+                                Key optimizations — including pipelining the normalization critical path and hardening the async
+                                handshake — improved WNS by over <strong>6 ns</strong> while cutting total power by <strong>~50%</strong>
+                                and area by <strong>~67%</strong> versus the unoptimized baseline. Row-level sparsity was also implemented,
+                                skipping normalization for low-energy rows and reducing single-core power from 83.2 mW to 64.9 mW.
+                            </p>
+                            <p>
+                                For more details, check out the <a href="https://github.com/NickJiEE/Dual-Core-ML-Accelerator" target="_blank" rel="noopener noreferrer">GitHub repository</a>!
+                            </p>
+                        </article>
+<section class="next-project shell">
+<p class="eyebrow">NEXT PROJECT</p><a href="project-9-bit-differential-sar-adc.html">9-bit Differential SAR ADC ↗</a>
+</section>
+<dialog class="image-dialog"><button class="dialog-close" aria-label="Close enlarged image">Close ×</button><img alt="">
+</dialog>
+</main>
+<footer class="footer shell"><a class="footer-name" href="main.html">Nick Ji<span>Digital thinking. Physical implementation.</span></a>
+<div><a href="https://github.com/nickjiee" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/nick-ji/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="index.html">Replay intro ↗</a>
+</div>
+<p>© <span data-year>2026</span> Nick Ji · San Diego, CA</p>
+</footer>
+</body>
+</html>

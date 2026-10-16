@@ -1,115 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nick Ji | Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital IC & Physical Design | Nick Ji</title>
+<meta name="description" content="Nick Ji — digital IC design, physical design, and AI/ML accelerator research at UC San Diego.">
+<link rel="icon" href="assets/images/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/site.js" defer>
+</script>
+<noscript><style>.menu-toggle{display:none!important}.nav{height:auto;min-height:90px;flex-wrap:wrap;gap:15px;padding-block:15px}.nav-links{display:flex;position:static;flex-direction:row;flex-wrap:wrap;padding:0;border:0}</style></noscript>
 </head>
-<body>
-    <div class="wrapper">
-        <!-- Navbar -->
-        <header>
-            <nav class="navbar">
-                <a href="main.html" class="logo">
-                    <img src="assets/images/logo_inv_thin_tran.png" alt="Nick Ji Logo">
-                </a>
-                <div class="menu-toggle" id="menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="main.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <!-- Hero Section -->
-        <main>
-            <section id="hero">
-                <div class="hero-label">// Digital IC &amp; Physical Design</div>
-                <h1>Hi, I'm Nick 👋</h1>
-                <p>M.S. Electrical Engineering @ UC San Diego &nbsp;·&nbsp; From RTL to physical implementation</p>
-                <a href="projects.html" class="btn">View My Work</a>
-            </section>
-
-            <!-- Quick Intro -->
-            <section id="intro">
-                <h2>From architecture to implementation.</h2>
-                <p>
-                    I'm interested in how digital architectures become efficient hardware. My work spans RTL design and verification,
-                    synthesis, and physical design, with a focus on AI/ML accelerators and the tradeoffs between power, performance,
-                    and area. As a graduate researcher in UC San Diego's VVIP Lab, I translate architecture concepts into RTL
-                    and evaluate them through hardware implementation.
-                </p>
-            </section>
-
-            <!-- FAQ Section -->
-            <section id="faq">
-                <h2>FAQ</h2>
-
-                <div class="faq-item">
-                    <div class="faq-question">What are your main areas of interest? <i>▼</i></div>
-                    <div class="faq-answer">My main interests are digital IC design, physical design, and AI/ML accelerator architectures. I enjoy connecting RTL and microarchitecture decisions to their impact on timing, power, and area after synthesis and place-and-route.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">What is your experience with the RTL-to-GDS flow? <i>▼</i></div>
-                    <div class="faq-answer">For my machine learning accelerator project in TSMC 65 nm, I worked on Verilog RTL, synthesis with Synopsys Design Compiler, and physical implementation with Cadence Innovus. I also developed and debugged gate-level simulations with SDF back-annotation in Xcelium, checking hardware results against software-computed values.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">What have you worked on in physical design? <i>▼</i></div>
-                    <div class="faq-answer">
-                        Beyond accelerator place-and-route, I've explored multi-bit flip-flop clustering and clock tree synthesis in OpenROAD.
-                        I built a Python clustering optimizer and reusable Tcl flows to compare placement and clock-tree strategies.
-                        In one CTS experiment, adjusting sink clustering reduced post-CTS max-fanout violations from 194 to 5 while maintaining timing closure.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">What are you researching now? <i>▼</i></div>
-                    <div class="faq-answer">I'm a graduate researcher in the VVIP Lab at UC San Diego, advised by Professor Mingu Kang and working with Ph.D. student Yun-Chia Yu. My research focuses on AI/ML accelerator architecture and VLSI implementation, translating ideas from research literature into RTL, verifying their behavior, and carrying designs through synthesis and physical implementation for evaluation.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">Which project best reflects your digital design interests? <i>▼</i></div>
-                    <div class="faq-answer">
-                        My dual-core machine learning accelerator brings together the parts of digital design I enjoy most: systolic-array
-                        computation, pipelined datapaths, asynchronous communication between independently clocked cores, and physical implementation.
-                        Optimizing the design showed me how architectural and implementation choices affect power, performance, and area.
-                        You can explore it on my <a href="projects.html">Projects page</a>.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">What are your future goals? <i>▼</i></div>
-                    <div class="faq-answer">
-                        I want to deepen my skills and knowledge in digital IC and physical design, especially timing analysis, clock tree synthesis,
-                        and power, performance, and area optimization. I'm excited to contribute to efficient compute hardware and
-                        develop a stronger understanding of the complete path from architecture to silicon.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">How can I collaborate with you? <i>▼</i></div>
-                    <div class="faq-answer">Feel free to reach out through my <a href="contact.html">Contact page</a> or connect with me on LinkedIn or GitHub!</div>
-                </div>
-            </section>
-        </main>
-
-        <!-- Footer -->
-        <footer>
-            <p>© 2025 Nick Ji &nbsp;·&nbsp; <a href="https://github.com/nickjiee" target="_blank">GitHub</a></p>
-        </footer>
-    </div>
-
-    <script src="js/menu.js"></script>
-    <script src="js/FAQ.js"></script>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav class="nav shell" aria-label="Main navigation"><a class="brand" href="main.html" aria-label="Nick Ji home">N<span class="brand-dot">.</span>J<span class="brand-name">NICK JI</span></a><button class="menu-toggle" aria-expanded="false" aria-controls="nav-links">Menu <span>+</span></button>
+<div class="nav-links" id="nav-links"><a href="main.html" aria-current="page">Home</a><a href="projects.html">Work</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+</div>
+</nav>
+</header>
+<main id="main">
+<section class="home-hero shell">
+<div class="hero-copy">
+<p class="eyebrow"><span class="status-dot"></span> DIGITAL IC / PHYSICAL DESIGN</p>
+<h1>From logic<br>to <em>layout.</em>
+</h1>
+<p class="hero-intro">I'm Nick Ji. I design digital hardware and explore what it takes to turn an architecture into an efficient physical implementation.</p>
+<div class="hero-actions"><a class="button" href="projects.html">Explore my work <span>↗</span></a><a class="quiet-link" href="about.html">A little about me →</a>
+</div>
+<div class="hero-affiliation"><span>UC SAN DIEGO</span><span>M.S. Electrical Engineering<br>Graduate Researcher · VVIP Lab</span>
+</div>
+</div>
+<div class="hero-art">
+<div class="art-top"><span>IMPLEMENTATION STUDY</span><span>TSMC 65 NM</span>
+</div><a href="project-dual-core-ml-accelerator.html" class="chip-image" aria-label="Explore the dual-core ML accelerator"><img src="assets/images/Dual Core Accelerator/dual_core_cover.png" alt="Physical layout of the dual-core machine learning accelerator"><span class="chip-cross top">+</span><span class="chip-cross bottom">+</span></a>
+<div class="art-bottom"><span>01 / DUAL-CORE ML ACCELERATOR</span><span>RTL → GDS ↗</span>
+</div>
+</div>
+</section>
+<div class="flow-strip">
+<div class="shell"><span>ARCHITECTURE</span><b>→</b><span>RTL &amp; VERIFICATION</span><b>→</b><span>SYNTHESIS</span><b>→</b><span>PHYSICAL DESIGN</span>
+</div>
+</div>
+<section class="section shell">
+<div class="section-heading">
+<div>
+<p class="eyebrow">01 / SELECTED WORK</p>
+<h2>Ideas, implemented.</h2>
+</div><a class="quiet-link" href="projects.html">All projects ↗</a>
+</div>
+<div class="work-grid selected"><a class="work-card" href="project-dual-core-ml-accelerator.html" data-category="Digital IC">
+<div class="work-image"><img src="assets/images/Dual Core Accelerator/dual_core_cover.png" alt="Dual-Core ML Accelerator" loading="lazy"><span class="image-arrow" aria-hidden="true">↗</span>
+</div>
+<div class="work-meta"><span>Digital IC</span><span>01</span>
+</div>
+<h3>Dual-Core ML Accelerator</h3>
+<p>A dual-core hardware accelerator for the attention mechanism in transformer models, synthesized and place-and-routed in TSMC 65nm targeting 1 GHz.</p><span class="text-link">Explore project <span aria-hidden="true">↗</span></span></a><a class="work-card" href="project-9-bit-differential-sar-adc.html" data-category="Mixed-signal IC">
+<div class="work-image"><img src="assets/images/SAR ADC/SAR_ADC_black.png" alt="9-bit Differential SAR ADC" loading="lazy"><span class="image-arrow" aria-hidden="true">↗</span>
+</div>
+<div class="work-meta"><span>Mixed-signal IC</span><span>02</span>
+</div>
+<h3>9-bit Differential SAR ADC</h3>
+<p>A fully custom-layout 9-bit differential SAR ADC in TSMC 65nm with bootstrapped sampling switches, achieving 50.5 dB SNDR and 59.5 dB SFDR, taped out as part of a 6-group top chip.</p><span class="text-link">Explore project <span aria-hidden="true">↗</span></span></a>
+</div>
+</section>
+<section class="research-band">
+<div class="shell research-grid">
+<div>
+<p class="eyebrow">02 / CURRENT RESEARCH</p>
+<h2>Efficient compute.<br>From the inside out.</h2>
+</div>
+<div>
+<p class="large-copy">AI/ML accelerator architecture<br>&amp; VLSI implementation.</p>
+<p>At UC San Diego's VVIP Lab, I work with Professor Mingu Kang and Ph.D. student Yun-Chia Yu to translate architecture concepts from research literature into RTL and evaluate designs through synthesis and physical implementation.</p><a class="text-link" href="about.html#journey">Follow my journey ↗</a>
+</div>
+</div>
+</section>
+<section class="section shell focus-section">
+<div>
+<p class="eyebrow">03 / HOW I WORK</p>
+<h2>The details<br>make the design.</h2>
+<p class="section-intro">Connecting decisions at the RTL level to their consequences in timing, power, and area.</p>
+</div>
+<div class="focus-list">
+<article><span>01</span>
+<div>
+<h3>Architecture &amp; RTL</h3>
+<p>Systolic arrays, pipelined datapaths, and accelerator control in Verilog and SystemVerilog.</p>
+</div>
+</article>
+<article><span>02</span>
+<div>
+<h3>Physical implementation</h3>
+<p>Synthesis, placement and routing, clock tree synthesis, and PPA optimization with Innovus and OpenROAD.</p>
+</div>
+</article>
+<article><span>03</span>
+<div>
+<h3>Verification &amp; evaluation</h3>
+<p>Testbenches, gate-level simulation with SDF back-annotation, and comparison against software-computed results.</p>
+</div>
+</article>
+</div>
+</section>
+<section class="section shell faq-section">
+<div>
+<p class="eyebrow">04 / A FEW MORE DETAILS</p>
+<h2>Beyond the layout.</h2>
+</div>
+<div class="faq-list">
+<details>
+<summary>What have you explored in physical design?</summary>
+<p>Alongside accelerator implementation in TSMC 65 nm, I've developed a Python multi-bit flip-flop clustering optimizer and reusable Tcl flows in OpenROAD. In one CTS experiment, adjusting sink clustering reduced post-CTS max-fanout violations from 194 to 5 while maintaining timing closure.</p>
+</details>
+<details>
+<summary>What am I working toward?</summary>
+<p>I'm deepening my expertise in digital IC and physical design, particularly timing analysis, clock tree synthesis, and power, performance, and area optimization. I want to contribute to efficient compute hardware with an understanding of the complete path from architecture to silicon.</p>
+</details>
+<details>
+<summary>Interested in working together?</summary>
+<p>I'd be glad to connect about digital hardware, physical design, or accelerator research. <a href="contact.html">Get in touch →</a>
+</p>
+</details>
+</div>
+</section>
+<section class="closing shell">
+<p class="eyebrow">LET'S CONNECT</p><a href="contact.html">Have something<br>in mind? <span>↗</span></a>
+</section>
+</main>
+<footer class="footer shell"><a class="footer-name" href="main.html">Nick Ji<span>Digital thinking. Physical implementation.</span></a>
+<div><a href="https://github.com/nickjiee" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/nick-ji/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="index.html">Replay intro ↗</a>
+</div>
+<p>© <span data-year>2026</span> Nick Ji · San Diego, CA</p>
+</footer>
 </body>
 </html>
