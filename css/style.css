@@ -749,7 +749,7 @@ body::before {
   margin-top: 0;
 }
 .timeline-item.expanded .timeline-details {
-  max-height: 300px;
+  max-height: 1200px;
   opacity: 1;
   margin-top: 12px;
 }
