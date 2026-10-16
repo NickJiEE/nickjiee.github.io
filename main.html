@@ -10,11 +10,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<script src="js/traces.js" defer></script>
 <script src="js/site.js" defer>
 </script>
 <noscript><style>.menu-toggle{display:none!important}.nav{height:auto;min-height:90px;flex-wrap:wrap;gap:15px;padding-block:15px}.nav-links{display:flex;position:static;flex-direction:row;flex-wrap:wrap;padding:0;border:0}</style></noscript>
 </head>
-<body><a class="skip-link" href="#main">Skip to content</a>
+<body class="home-page"><a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
 <nav class="nav shell" aria-label="Main navigation"><a class="brand" href="main.html" aria-label="Nick Ji home">N<span class="brand-dot">.</span>J<span class="brand-name">NICK JI</span></a><button class="menu-toggle" aria-expanded="false" aria-controls="nav-links">Menu <span>+</span></button>
 <div class="nav-links" id="nav-links"><a href="main.html" aria-current="page">Home</a><a href="projects.html">Work</a><a href="about.html">About</a><a href="contact.html">Contact</a>
@@ -22,6 +23,7 @@
 </nav>
 </header>
 <main id="main">
+<svg class="circuit-background" aria-hidden="true" focusable="false"></svg>
 <section class="home-hero shell">
 <div class="hero-copy">
 <p class="eyebrow"><span class="status-dot"></span> DIGITAL IC / PHYSICAL DESIGN</p>
@@ -40,6 +42,7 @@
 </div>
 </div>
 </section>
+<div class="trace-controls shell"><button id="trace-toggle" type="button" aria-pressed="false" hidden>Scroll effects: off</button></div>
 <div class="flow-strip">
 <div class="shell"><span>ARCHITECTURE</span><b>→</b><span>RTL &amp; VERIFICATION</span><b>→</b><span>SYNTHESIS</span><b>→</b><span>PHYSICAL DESIGN</span>
 </div>

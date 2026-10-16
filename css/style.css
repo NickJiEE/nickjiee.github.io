@@ -154,7 +154,8 @@ em{
   background:var(--accent);
   border-radius:50%;
   bottom:0;
-  left:50%
+  left:50%;
+  transform:translateX(-50%)
 }
 .menu-toggle{
   display:none
@@ -916,7 +917,8 @@ details p a{
   }
   .nav-links a[aria-current]:after{
     left:0;
-    bottom:20px
+    bottom:20px;
+    transform:none
   }
   .home-hero{
     grid-template-columns:1fr;
@@ -1208,7 +1210,7 @@ details p a{
 .nav-links a::before {
   content: '';
   position: absolute;
-  bottom: 3px;
+  bottom: 7px;
   left: 0;
   right: 0;
   height: 1px;
@@ -1269,4 +1271,36 @@ details p a{
 }
 .project-return .back-link:hover {
   color: var(--accent);
+}
+
+/* Homepage signal route follows the document, branching in section whitespace. */
+.home-page #main { position: relative; }
+.circuit-background {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  z-index: 2; pointer-events: none; overflow: hidden;
+  fill: none; stroke: var(--accent); stroke-width: 1;
+}
+.circuit-track { opacity: .12; }
+.circuit-source-pad { opacity: .65; }
+.circuit-source-ring { fill: var(--bg); stroke: var(--accent); }
+.circuit-source { fill: var(--accent); stroke: none; }
+.circuit-signal { opacity: .42; stroke-dasharray: 1; stroke-dashoffset: 1; stroke-linejoin: miter; }
+.circuit-node { fill: var(--bg); stroke: var(--accent); opacity: .45; }
+.circuit-node.is-arrived { fill: var(--accent); opacity: .7; }
+.circuit-route-on-light { stroke: #314d3e; }
+.circuit-route-on-light .circuit-node { fill: var(--accent); stroke: #314d3e; }
+.circuit-route-on-light .circuit-node.is-arrived { fill: #314d3e; }
+.circuit-background:not(.is-scroll-linked) .circuit-signal { opacity: .19; }
+@media(max-width:760px) {
+  .circuit-background { stroke-width: .8; }
+  .circuit-signal { opacity: .32; }
+}
+
+.trace-controls { display: flex; justify-content: flex-end; padding-bottom: 16px; }
+.trace-controls button {
+  background: transparent; border: 1px solid var(--line); color: var(--muted);
+  padding: 10px 14px; min-height: 44px; font: 10px var(--mono);
+}
+.trace-controls button:hover, .trace-controls button[aria-pressed="true"] {
+  color: var(--accent); border-color: #b5efce55;
 }
