@@ -1304,3 +1304,42 @@ details p a{
 .trace-controls button:hover, .trace-controls button[aria-pressed="true"] {
   color: var(--accent); border-color: #b5efce55;
 }
+
+/* Journey milestones: one continuous track, with content always visible. */
+.journey { position: relative; border-top: 0; }
+.journey-item {
+  position: relative;
+  padding-left: 38px;
+  grid-template-columns: minmax(160px, .55fr) minmax(0, 1.5fr);
+  column-gap: 55px;
+  border-bottom: 0;
+}
+.journey-item > div:last-child {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 30px;
+}
+.journey-item:last-child > div:last-child { border-bottom: 0; }
+.journey-item::before {
+  content: ''; position: absolute; left: 6px; top: 44px;
+  width: 1px; height: 100%; background: var(--line);
+}
+.journey-item:last-child::before { display: none; }
+.journey-marker {
+  position: absolute; top: 38px; left: 0;
+  width: 13px; height: 13px; border: 1px solid #668b77;
+  border-radius: 50%; background: var(--bg); z-index: 2;
+}
+.journey-marker::after {
+  content: ''; position: absolute; inset: 3px;
+  border-radius: 50%; background: var(--accent); opacity: .45;
+}
+.journey-item.is-current .journey-marker { border-color: var(--accent); box-shadow: 0 0 0 5px #b5efce12; }
+.journey-item.is-current .journey-marker::after { opacity: 1; }
+.journey-controls { padding: 0; flex-shrink: 0; }
+@media(max-width:760px) {
+  #journey > .section-heading { flex-wrap: wrap; }
+  .journey-item { grid-template-columns: minmax(0,1fr); padding-left: 30px; gap: 12px; }
+  .journey-marker { top: 28px; }
+  .journey-item::before { top: 34px; }
+  .journey-item > div:last-child { padding-bottom: 22px; }
+}
